@@ -8,7 +8,7 @@
         },
         "location": {
             "type": "string",
-		"defaultValue": "US East"
+		"defaultValue": "eastus"
         },
         "messagingUnits": {
             "type": "string",
