@@ -4,7 +4,7 @@
     "parameters": {
         "name": {
         	"type": "string",
-		"defaultValue": "bingobongo""
+		"defaultValue": "bingobongo"
         },
         "location": {
             "type": "string",
