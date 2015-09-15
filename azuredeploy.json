@@ -94,7 +94,7 @@
             "metadata": {
                 "description": "The name of the public IP address used by the Load Balancer"
             },
-            "defaultValue": "adpublicIP"
+            "defaultValue": "adpublicIP2"
         },
         "publicIPAddressType": {
             "type": "string",
