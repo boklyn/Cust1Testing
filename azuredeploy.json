@@ -15,8 +15,8 @@
 		"defaultValue": "1"
         },
         "sku": {
-            "type": "string",
-		"defaultValue": "Standard"
+            "type": "integer",
+		"defaultValue": "1"
         }
     },
     "resources": [
