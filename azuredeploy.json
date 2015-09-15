@@ -3,20 +3,16 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
-            "type": "string",
-            "defaultValue": "bingobongo"
+            "type": "string"
         },
         "location": {
-            "type": "string",
-            "defaultValue": "East US"
+            "type": "string"
         },
         "messagingUnits": {
-            "type": "string",
-            "defaultValue": "Standard"
+            "type": "string"
         },
         "sku": {
-            "type": "string",
-            "defaultValue": "Messaging"
+            "type": "string"
         }
     },
     "resources": [
