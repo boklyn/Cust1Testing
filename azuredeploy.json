@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
-            "type": "string".
+            "type": "string",
             "defaultValue": "bingobongo"
         },
         "location": {
@@ -11,7 +11,7 @@
             "defaultValue": "East US"
         },
         "messagingUnits": {
-            "type": "string"
+            "type": "string",
             "defaultValue": "Standard"
         },
         "sku": {
