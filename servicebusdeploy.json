@@ -16,7 +16,7 @@
         },
         "sku": {
             "type": "string",
-		"defaultValue": "1"
+		"defaultValue": "2"
         }
     },
     "resources": [
