@@ -3,16 +3,20 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
-            "type": "string"
+            "type": "string",
+			"defaultValue": "bingobongo""
         },
         "location": {
-            "type": "string"
+            "type": "string",
+			"defaultValue": "US East"
         },
         "messagingUnits": {
-            "type": "string"
+            "type": "string",
+			"defaultValue": "1"
         },
         "sku": {
-            "type": "string"
+            "type": "string",
+			"defaultValue": "Standard"
         }
     },
     "resources": [
@@ -24,8 +28,8 @@
             "properties": {
                 "MessagingSku":  "[parameters('sku')]",
                 "MessagingSKUPlan": {
-                    MessagingUnits: "[parameters('messagingUnits')]",
-                    SKU: "[parameters('sku')]"
+                    "MessagingUnits": "[parameters('messagingUnits')]",
+                    "SKU": "[parameters('sku')]"
                 }
             }
         }
