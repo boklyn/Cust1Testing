@@ -1,0 +1,267 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "deploymentLabel": {
+            "type": "string",
+            "defaultValue": "Dingolingo2015.5.15.1725",
+            "metadata": {
+                "description": "Friendly name for your deployment"
+            }
+        },
+        "newStorageAccountName": {
+            "type": "string",
+            "defaultValue": "boklynwong",
+            "metadata": {
+                "description": "Name of the Storage Account"
+            }
+        },
+        "storageAccountType": {
+            "type": "string",
+            "defaultValue": "Standard_LRS",
+            "allowedValues": [
+                "Standard_LRS",
+                "Standard_GRS",
+                "Standard_ZRS"
+            ],
+            "metadata": {
+                "description": "Storage Account type"
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "West US",
+            "allowedValues": [ "East US", "West US", "West Europe", "East Asia", "Southeast Asia" ],
+            "metadata": {
+                "description": "Location of storage account"
+            }
+        },
+        "serviceDomainName": {
+            "type": "string",
+            "defaultValue": "boklynwong",
+            "metadata": {
+                "description": "Name of your Cloud Services hosted service"
+            }
+        },
+        "serviceDomainNameLocation": {
+            "type": "string",
+            "defaultValue": "eastus2",
+            "metadata": {
+                "description": "Location of Hosted Service"
+            }
+        },
+        "servicePackageLink": {
+            "type": "string",
+            "defaultValue": "https://cust1stor1.blob.core.windows.net/packages/AzureCloudService3.cspkg",
+            "metadata": {
+                "description": "Link to the .cspkg in Azure storage account"
+            }
+        },
+        "serviceConfigurationLink": {
+            "type": "string",
+            "defaultValue": "https://cust1stor1.blob.core.windows.net/packages/ServiceConfiguration.Cloud.cscfg",
+            "metadata": {
+                "description": "Link to the .cscfg in Azure storage account"
+            }
+        },
+        "pfx": {
+            "type": "string",
+            "defaultValue": "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",
+            "metadata": {
+                "description": "pfx for the service certificate"
+            }
+        },
+        "thumbprint": {
+            "type": "string",
+            "defaultValue": "165b7ed676e12e6b3decd42655586b746da8b705",
+            "metadata": {
+                "description": "thumbprint of the service certificate"
+            }
+        },
+        "DingoStorageName": {
+            "type": "string",
+            "defaultValue": "boklynwongstorage"
+        },
+        "DingoStorageType": {
+            "type": "string",
+            "defaultValue": "Standard_LRS",
+            "allowedValues": [
+                "Standard_LRS",
+                "Standard_GRS",
+                "Standard_ZRS"
+            ]
+        },
+        "DingoStorageLocation": {
+            "type": "string",
+            "defaultValue": "West US",
+            "allowedValues": [
+                "East US",
+                "West US",
+                "West Europe",
+                "East Asia",
+                "South East Asia"
+            ]
+        },
+        "DingoRedisName": {
+            "type": "string",
+            "defaultValue": "dingoredis"
+        },
+        "DingoRedisLocation": {
+            "type": "string",
+            "defaultValue": "West US"
+        },
+        "DingoRedisSKUName": {
+            "type": "string",
+            "allowedValues": [
+                "Basic",
+                "Standard"
+            ],
+            "defaultValue": "Standard"
+        },
+        "DingoRedisSKUFamily": {
+            "type": "string",
+            "allowedValues": [
+                "C"
+            ],
+            "defaultValue": "C"
+        },
+        "DingoRedisSKUCapacity": {
+            "type": "int",
+            "allowedValues": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "defaultValue": 0
+        },
+        "DingoRedisRedisVersion": {
+            "type": "string",
+            "allowedValues": [
+                "2.8"
+            ],
+            "defaultValue": "2.8"
+        }
+    },
+    "variables": {
+        "serviceConfiguration": "[concat('<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<ServiceConfiguration serviceName=\"TEST\" xmlns=\"http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration\" osFamily=\"3\" osVersion=\"*\" schemaVersion=\"2013-10.2.2\">\n  <Role name=\"WebRole3\">\n    <Instances count=\"2\" />\n    <ConfigurationSettings>\n      <Setting name=\"Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString\" value=\"UseDevelopmentStorage=true\" />\n    </ConfigurationSettings>\n    <Certificates>\n      <Certificate name=\"SSLCert\" thumbprint=\"', parameters('thumbprint'),'\" thumbprintAlgorithm=\"sha1\" />\n  </Certificates>\n  </Role>\n</ServiceConfiguration>')]",
+        "seconddomainname": "bingoboklyndingo"
+    },
+    "resources": [
+        {
+            "apiVersion": "2014-06-01",
+            "type": "Microsoft.ClassicCompute/domainNames",
+            "name": "[parameters('serviceDomainName')]",
+            "location": "[parameters('serviceDomainNameLocation')]",
+            "properties": {
+
+            },
+            "resources": [
+                {
+                    "apiVersion": "2014-06-01",
+                    "name": "[concat('sha1-', parameters('thumbprint'))]",
+                    "type": "serviceCertificates",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.ClassicCompute/domainNames', parameters('serviceDomainName'))]"
+                    ],
+                    "properties": {
+                        "data": "[parameters('pfx')]",
+                        "certificateFormat": "pfx",
+                        "password": "test"
+                    }
+                },
+                {
+                    "apiVersion": "2014-06-01",
+                    "name": "production",
+                    "type": "slots",
+                    "dependsOn": [
+                        "[concat('Microsoft.ClassicCompute/domainNames/', parameters('serviceDomainName'), '/serviceCertificates/', 'sha1-', parameters('thumbprint'))]",
+                        "[resourceId('Microsoft.ClassicCompute/domainNames', parameters('serviceDomainName'))]"
+                    ],
+                    "properties": {
+                        "packageLink": {
+                            "uri": "[parameters('servicePackageLink')]"
+                        },
+                        "deploymentLabel": "[parameters('deploymentLabel')]",
+                        "Configuration": "[variables('serviceConfiguration')]",
+                        "deploymentOptions": "StartDeployment"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "[parameters('DingoStorageName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "location": "[parameters('DingoStorageLocation')]",
+            "apiVersion": "2015-05-01-preview",
+            "dependsOn": [ ],
+            "tags": {
+                "displayName": "DingoStorage"
+            },
+            "properties": {
+                "accountType": "[parameters('DingoStorageType')]"
+            }
+        },
+        {
+            "name": "[parameters('DingoRedisName')]",
+            "type": "Microsoft.Cache/Redis",
+            "location": "[parameters('DingoRedisLocation')]",
+            "apiVersion": "2014-04-01-preview",
+            "dependsOn": [],
+            "tags": {
+                "displayName": "DingoRedis"
+            },
+            "properties": {
+                "sku": {
+                    "name": "[parameters('DingoRedisSKUName')]",
+                    "family": "[parameters('DingoRedisSKUFamily')]",
+                    "capacity": "[parameters('DingoRedisSKUCapacity')]"
+                },
+                "redisVersion": "[parameters('DingoRedisRedisVersion')]"
+            }
+        },
+         {
+            "apiVersion": "2014-06-01",
+            "type": "Microsoft.ClassicCompute/domainNames",
+            "name": "[variables('seconddomainname')]",
+            "location": "[parameters('serviceDomainNameLocation')]",
+            "properties": {
+
+            },
+            "resources": [
+                {
+                    "apiVersion": "2014-06-01",
+                    "name": "[concat('sha1-', parameters('thumbprint'))]",
+                    "type": "serviceCertificates",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.ClassicCompute/domainNames', variables('seconddomainname'))]"
+                    ],
+                    "properties": {
+                        "data": "[parameters('pfx')]",
+                        "certificateFormat": "pfx",
+                        "password": "test"
+                    }
+                },
+                {
+                    "apiVersion": "2014-06-01",
+                    "name": "production",
+                    "type": "slots",
+                    "dependsOn": [                        
+                        "[resourceId('Microsoft.ClassicCompute/domainNames', variables('seconddomainname'))]"
+                    ],
+                    "properties": {
+                        "packageLink": {
+                            "uri": "[parameters('servicePackageLink')]"
+                        },
+                        "deploymentLabel": "[parameters('deploymentLabel')]",
+                        "Configuration": "[variables('serviceConfiguration')]",
+                        "deploymentOptions": "StartDeployment"
+                    }
+                }
+            ]
+        }
+    ]
+}
