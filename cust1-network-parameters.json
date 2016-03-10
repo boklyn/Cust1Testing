@@ -1,0 +1,15 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "backEndSubnetName": { "value": "SZEN-SUB-10001" },
+    "backEndSubnetRange": { "value": "10.201.201.0/25" },
+    "gatewaySubnetName": { "value": "GatewaySubnet" },
+    "gatewaySubnetRange": { "value": "10.201.206.0/28" },
+    "frontEndSubnetName": { "value": "SZEN-SUB-10000" },
+    "frontEndSubnetRange": { "value": "10.201.200.0/25" },
+    "location": { "value": "North Europe" },
+    "vNETAddressPrefix": { "value": "10.201.200.0/21" },
+    "vNETName": { "value": "SZEN-VNET-10000" }
+  }
+}
