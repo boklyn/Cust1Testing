@@ -102,7 +102,7 @@
         "webtiersubname": "[concat(parameters('webtiersubnetname'),'_',replace(parameters('webtiersubnetrange'),'/','_'))]",
         "datatiersubname": "[concat(parameters('datatiersubnetname'),'_',replace(parameters('datatiersubnetrange'),'/','_'))]",
         "admintiersubname": "[concat(parameters('datatiersubnetname'),'_',replace(parameters('admintiersubnetrange'),'/','_'))]",
-        "gatwaytiersubname": "[concat(parameters('datatiersubnetname'),'_',replace(parameters('gatewaytiersubnetrange'),'/','_'))]"
+        "gatwaytiersubname": "[concat(parameters('datatiersubnetname'),'_',replace(parameters('gatewaysubnetrange'),'/','_'))]"
     },
     "resources": [
         {
