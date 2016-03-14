@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "VHDStorageAccountName": {
-      "value": "EVHE2DMSTOR001"
+      "value": ""
     },
     "location": {
       "value": "East US"
