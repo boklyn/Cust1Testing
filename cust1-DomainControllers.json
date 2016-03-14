@@ -183,6 +183,7 @@
         "adDataDiskSize": 1000,
         "adPDCModulesURL": "[concat(parameters('assetLocation'),'CreateADPDC.ps1.zip')]",
         "adPDCConfigurationFunction": "CreateADPDC.ps1\\CreateADPDC",
+        "adBDCConfigurationFunction": "CreateADBDC.ps1\\CreateADBDC",
         "adBDCModulesURL": "[concat(parameters('assetLocation'),'CreateADBDC.ps1.zip')]",
         "vnetTemplateUri": "[concat(parameters('assetLocation'),'vnet.json')]",
         "nicTemplateUri": "[concat(parameters('assetLocation'),'nic.json')]",
@@ -356,34 +357,20 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "location": {
-                        "value": "[parameters('location')]"
-                    },
-                    "virtualNetworkName": {
-                        "value": "[parameters('vnetname')]"
-                    },
-                    "virtualNetworkAddressRange": {
-                        "value": "[parameters('virtualNetworkAddressRange')]"
-                    },
-                    "DNSServerAddress": {
-                        "value": [
-                            "[parameters('adPDCNicIPAddress')]"
-                        ]
-                    },
-                    "webtiersubnetname": { "value": "EHE2DM-SUB-001" },
+                    "webtiersubnetname": { "value": "EVHE2DM-SUB-001" },
                     "webtiersubnetrange": { "value": "172.24.2.0/24" },
                     "gatewaySubnetName": { "value": "GatewaySubnet" },
                     "gatewaySubnetRange": { "value": "172.24.0.0/28" },
-                    "apptiersubnetname": { "value": "EHE2DM-SUB-002" },
+                    "apptiersubnetname": { "value": "EVHE2DM-SUB-002" },
                     "apptiersubnetrange": { "value": "172.24.8.0/24" },
-                    "admintiersubnetname": { "value": "EHE2DM-SUB-003" },
+                    "admintiersubnetname": { "value": "EVHE2DM-SUB-003" },
                     "admintiersubnetrange": { "value": "172.24.14.0/24" },
-                    "datatiersubnetname": { "value": "EHE2DM-SUB-004" },
+                    "datatiersubnetname": { "value": "EVHE2DM-SUB-004" },
                     "datatiersubnetrange": { "value": "172.24.12.0/24" },
                     "location": { "value": "East US 2" },
                     "vNETAddressPrefix": { "value": "172.24.0.0/20" },
-                    "vNETName": { "value": "EHE2DM-VNET-001" },
-                    "DNSServerAddress": { "value": [ "172.24.14.1" ] }
+                    "vNETName": { "value": "EVHE2DM-VNET-001" },
+                    "DNSServerAddress": { "value": ["[parameters('adPDCNicIPAddress')]"] }
                 }
             }
         },
@@ -416,17 +403,7 @@
                                     "privateIPAddress": "[parameters('adBDCNicIPAddress')]",
                                     "subnet": {
                                         "id": "[variables('adSubnetRef')]"
-                                    },
-                                    "loadBalancerBackendAddressPools": [
-                                        {
-                                            "id": "[variables('adBEAddressPoolID')]"
-                                        }
-                                    ],
-                                    "loadBalancerInboundNatRules": [
-                                        {
-                                            "id": "[variables('adBDCRDPNATRuleID')]"
-                                        }
-                                    ]
+                                    }
                                 }
                             }
                         ]
@@ -447,8 +424,7 @@
             "dependsOn": [
                 "[resourceId('Microsoft.Storage/storageAccounts',parameters('VHDStorageAccountName'))]",
                 "[resourceId('Microsoft.Network/networkInterfaces',parameters('adBDCNicName'))]",
-                "[resourceId('Microsoft.Compute/availabilitySets', parameters('adAvailabilitySetName'))]",
-                "[resourceId('Microsoft.Network/loadBalancers',variables('adLBName'))]"
+                "[resourceId('Microsoft.Compute/availabilitySets', parameters('adAvailabilitySetName'))]"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -545,21 +521,19 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "location": {
-                        "value": "[parameters('location')]"
-                    },
-                    "virtualNetworkName": {
-                        "value": "[parameters('virtualNetworkName')]"
-                    },
-                    "virtualNetworkAddressRange": {
-                        "value": "[parameters('virtualNetworkAddressRange')]"
-                    },
-                    "subnetName": {
-                        "value": "[parameters('adSubnetName')]"
-                    },
-                    "subnetRange": {
-                        "value": "[parameters('adSubnet')]"
-                    },
+                    "webtiersubnetname": { "value": "EVHE2DM-SUB-001" },
+                    "webtiersubnetrange": { "value": "172.24.2.0/24" },
+                    "gatewaySubnetName": { "value": "GatewaySubnet" },
+                    "gatewaySubnetRange": { "value": "172.24.0.0/28" },
+                    "apptiersubnetname": { "value": "EVHE2DM-SUB-002" },
+                    "apptiersubnetrange": { "value": "172.24.8.0/24" },
+                    "admintiersubnetname": { "value": "EVHE2DM-SUB-003" },
+                    "admintiersubnetrange": { "value": "172.24.14.0/24" },
+                    "datatiersubnetname": { "value": "EVHE2DM-SUB-004" },
+                    "datatiersubnetrange": { "value": "172.24.12.0/24" },
+                    "location": { "value": "East US 2" },
+                    "vNETAddressPrefix": { "value": "172.24.0.0/20" },
+                    "vNETName": { "value": "EVHE2DM-VNET-001" },
                     "DNSServerAddress": {
                         "value": [
                             "[parameters('adPDCNicIPAddress')]",

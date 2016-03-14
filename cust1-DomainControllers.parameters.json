@@ -48,13 +48,13 @@
       "value": "myPubIp"
     },
     "assetLocation": {
-      "value": "https://github.com/Azure/azure-quickstart-templates/raw/master/active-directory-new-domain-ha-2-dc/"
+      "value": "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/"
     },
     "vnetname": {
-      "value": "EHE2DM-VNET-001"
+      "value": "EVHE2DM-VNET-001"
     },
     "adsubname": {
-      "value": "EHE2DM-SUB-003"
+      "value": "EVHE2DM-SUB-003_172.24.14.0_24"
     }
   }
 }
