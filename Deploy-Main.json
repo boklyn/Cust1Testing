@@ -1,0 +1,43 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "deploychoice": {
+            "type": "string",
+            "metadata": {
+                "description": "Environment to Deploy"
+            },
+            "allowedValues": [
+                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-network.json"
+            ]
+        },
+        "paramchoice": {
+            "type": "string",
+            "metadata": {
+                "description": "Different Parameters files choice"
+            },
+            "allowedValues": [
+                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-network-parameters.json"
+            ]
+        }
+
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-01-01",
+            "name": "ProductionDeployment",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[parameters('deploychoice')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parametersLink": {
+                    "uri": "[parameters('paramchoice')]",
+                    "contentVersion": "1.0.0.0"
+                }
+            }
+        }
+    ]
+}
