@@ -2,14 +2,19 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "backEndSubnetName": { "value": "SZEN-SUB-10001" },
-    "backEndSubnetRange": { "value": "10.201.201.0/25" },
+    "webtiersubnetname": { "value": "SZEN-SUB-10001" },
+    "webtiersubnetrange": { "value": "172.24.2.0/24" },
     "gatewaySubnetName": { "value": "GatewaySubnet" },
-    "gatewaySubnetRange": { "value": "10.201.206.0/28" },
-    "frontEndSubnetName": { "value": "SZEN-SUB-10000" },
-    "frontEndSubnetRange": { "value": "10.201.200.0/25" },
+    "gatewaySubnetRange": { "value": "172.24.0.0/28" },
+    "apptiersubnetname": { "value": "SZEN-SUB-10000" },
+    "apptiersubnetrange": { "value": "172.24.8.0/24" },
+    "admintiersubnetname": { "value": "SZEN-SUB-10000" },
+    "admintiersubnetrange": { "value": "172.24.14.0/24" },
+    "datatiersubnetname": { "value": "SZEN-SUB-10000" },
+    "datatiersubnetrange": { "value": "172.24.12.0/24" },
     "location": { "value": "North Europe" },
-    "vNETAddressPrefix": { "value": "10.201.200.0/21" },
-    "vNETName": { "value": "SZEN-VNET-10000" }
+    "vNETAddressPrefix": { "value": "172.24.0.0/20" },
+    "vNETName": { "value": "SZEN-VNET-10000" },
+    "DNSServerAddress": { "value": "172.24.14.1" }
   }
 }

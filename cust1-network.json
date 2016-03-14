@@ -86,6 +86,12 @@
             "metadata": {
                 "description": "VNET IP range"
             }
+        },
+        "DNSServerAddress": {
+          "type": "array",
+          "metadata": {
+            "Description": "The DNS address(es) of the DNS Server(s) used by the VNET"
+          }
         }
     },
     "variables": {
@@ -129,7 +135,7 @@
                         }
                     },
                     {
-                        "name": "[parameters('datatiersubname')]",
+                        "name": "[parameters('datatiersubnetname')]",
                         "properties": {
                             "addressPrefix": "[parameters('datatiersubnetrange')]"
                         }

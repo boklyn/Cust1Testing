@@ -1,0 +1,54 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "VHDStorageAccountName": {
+      "value": "USE2STORDM-0001"
+    },
+    "location": {
+      "value": "East US 2"
+    },
+    "adPDCNicName": {
+      "value": "USE2NICDM-001"
+    },
+    "adPDCNicIPAddress": {
+      "value": "172.24.14.1"
+    },
+    "adBDCNicName": {
+      "value": "USE2NICDM002"
+    },
+    "adBDCNicIPAddress": {
+      "value": "172.24.14.2"
+    },
+    "adPDCVMName": {
+      "value": "USE2VMDMDC001"
+    },
+    "adBDCVMName": {
+      "value": "USE2VMDMDC002"
+    },
+    "adminUsername": {
+      "value": "evoadmin"
+    },
+    "adminPassword": {
+      "value": "iVcMpEhwVkOUdIQP4xFx"
+    },
+    "adVMSize": {
+      "value": "Standard_D1"
+    },
+    "adAvailabilitySetName": {
+      "value": "USE2ASetDM001"
+    },
+    "domainName": {
+      "value": "azureqa.corp.evolenthealth.com"
+    },
+    "dnsPrefix": {
+      "value": ""
+    },
+    "publicIPAddressName": {
+      "value": "myPubIp"
+    },
+    "assetLocation": {
+      "value": "https://github.com/Azure/azure-quickstart-templates/raw/master/active-directory-new-domain-ha-2-dc/"
+    }
+  }
+}
