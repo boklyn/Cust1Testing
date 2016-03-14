@@ -41,12 +41,6 @@
     "domainName": {
       "value": "azureqa.corp.evolenthealth.com"
     },
-    "dnsPrefix": {
-      "value": ""
-    },
-    "publicIPAddressName": {
-      "value": "myPubIp"
-    },
     "assetLocation": {
       "value": "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/"
     },
