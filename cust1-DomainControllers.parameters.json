@@ -12,13 +12,13 @@
       "value": "EVHE2DM-NIC-001"
     },
     "adPDCNicIPAddress": {
-      "value": "172.24.14.1"
+      "value": "172.24.14.4"
     },
     "adBDCNicName": {
       "value": "EVHE2DM-NIC-002"
     },
     "adBDCNicIPAddress": {
-      "value": "172.24.14.2"
+      "value": "172.24.14.5"
     },
     "adPDCVMName": {
       "value": "EVHE2DM-SVRDC-001"
