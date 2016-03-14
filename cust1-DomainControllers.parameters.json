@@ -21,10 +21,10 @@
       "value": "172.24.14.5"
     },
     "adPDCVMName": {
-      "value": "EVHE2DM-SVRDC-001"
+      "value": "EVHE2DM-SVR-001"
     },
     "adBDCVMName": {
-      "value": "EVHE2DM-SVRDC-002"
+      "value": "EVHE2DM-SVR-002"
     },
     "adminUsername": {
       "value": "evoadmin"
