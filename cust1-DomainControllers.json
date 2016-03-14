@@ -161,9 +161,32 @@
                 "description": "The location of resources such as templates and DSC modules that the script is dependent"
             },
             "defaultValue": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/active-directory-new-domain-ha-2-dc/"
+        },
+        "adsubname": {
+            "type": "string",
+            "metadata": {
+                "description": "The subnet name of where to place the domain controllers"
+            }
+        },
+        "vnetname": {
+            "type": "string",
+            "metadata": {
+                "description": "The vnet name of where to place the domain controllers"
+            }
         }
     },
     "variables": {
+        "VnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetname'))]",
+        "adSubnetRef": "[concat(variables('VnetID'),'/subnets/',parameters('adSubName'))]",
+        "adPDCDataDisk": "EVHADPDCDataDisk",
+        "adBDCDataDisk": "EVHADBDCDataDisk",
+        "adDataDiskSize": 1000,
+        "adPDCModulesURL": "[concat(parameters('assetLocation'),'CreateADPDC.ps1.zip')]",
+        "adPDCConfigurationFunction": "CreateADPDC.ps1\\CreateADPDC",
+        "adBDCModulesURL": "[concat(parameters('assetLocation'),'CreateADBDC.ps1.zip')]",
+        "vnetTemplateUri": "[concat(parameters('assetLocation'),'vnet.json')]",
+        "nicTemplateUri": "[concat(parameters('assetLocation'),'nic.json')]",
+        "vnetwithDNSTemplateUri": "[concat(parameters('assetLocation'),'cust1-network.json')]"
     },
     "resources": [
         {
@@ -186,8 +209,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "Microsoft.Resources/deployments/VNet",
-                "[concat('Microsoft.Network/loadBalancers/',variables('adLBName'))]"
+                "Microsoft.Resources/deployments/VNet"
             ],
             "apiVersion": "2015-05-01-preview",
             "properties": {
@@ -199,17 +221,7 @@
                             "privateIPAddress": "[parameters('adPDCNicIPAddress')]",
                             "subnet": {
                                 "id": "[variables('adSubnetRef')]"
-                            },
-                            "loadBalancerBackendAddressPools": [
-                                {
-                                    "id": "[variables('adBEAddressPoolID')]"
-                                }
-                            ],
-                            "loadBalancerInboundNatRules": [
-                                {
-                                    "id": "[variables('adPDCRDPNATRuleID')]"
-                                }
-                            ]
+                            }
                         }
                     }
                 ]
@@ -220,8 +232,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "Microsoft.Resources/deployments/VNet",
-                "[concat('Microsoft.Network/loadBalancers/',variables('adLBName'))]"
+                "Microsoft.Resources/deployments/VNet"
             ],
             "apiVersion": "2015-05-01-preview",
             "properties": {
@@ -233,17 +244,7 @@
                             "privateIPAddress": "[parameters('adBDCNicIPAddress')]",
                             "subnet": {
                                 "id": "[variables('adSubnetRef')]"
-                            },
-                            "loadBalancerBackendAddressPools": [
-                                {
-                                    "id": "[variables('adBEAddressPoolID')]"
-                                }
-                            ],
-                            "loadBalancerInboundNatRules": [
-                                {
-                                    "id": "[variables('adBDCRDPNATRuleID')]"
-                                }
-                            ]
+                            }
                         }
                     }
                 ]
@@ -255,10 +256,9 @@
             "name": "[parameters('adPDCVMName')]",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts',parameters('newStorageAccountName'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts',parameters('VHDStorageAccountName'))]",
                 "[resourceId('Microsoft.Network/networkInterfaces',parameters('adPDCNicName'))]",
-                "[resourceId('Microsoft.Compute/availabilitySets', parameters('adAvailabilitySetName'))]",
-                "[resourceId('Microsoft.Network/loadBalancers',variables('adLBName'))]"
+                "[resourceId('Microsoft.Compute/availabilitySets', parameters('adAvailabilitySetName'))]"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -282,7 +282,7 @@
                     "osDisk": {
                         "name": "osdisk",
                         "vhd": {
-                            "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/vhds0/','osdisk.vhd')]"
+                            "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/vhds0/','osdisk.vhd')]"
                         },
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
@@ -290,7 +290,7 @@
                     "dataDisks": [
                         {
                             "vhd": {
-                                "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/vhds0/', variables('adPDCDataDisk'),'-1.vhd')]"
+                                "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/vhds0/', variables('adPDCDataDisk'),'-1.vhd')]"
                             },
                             "name": "[concat(parameters('adPDCVMName'),'-data-disk1')]",
                             "caching": "None",
@@ -360,22 +360,30 @@
                         "value": "[parameters('location')]"
                     },
                     "virtualNetworkName": {
-                        "value": "[parameters('virtualNetworkName')]"
+                        "value": "[parameters('vnetname')]"
                     },
                     "virtualNetworkAddressRange": {
                         "value": "[parameters('virtualNetworkAddressRange')]"
-                    },
-                    "subnetName": {
-                        "value": "[parameters('adSubnetName')]"
-                    },
-                    "subnetRange": {
-                        "value": "[parameters('adSubnet')]"
                     },
                     "DNSServerAddress": {
                         "value": [
                             "[parameters('adPDCNicIPAddress')]"
                         ]
-                    }
+                    },
+                    "webtiersubnetname": { "value": "EHE2DM-SUB-001" },
+                    "webtiersubnetrange": { "value": "172.24.2.0/24" },
+                    "gatewaySubnetName": { "value": "GatewaySubnet" },
+                    "gatewaySubnetRange": { "value": "172.24.0.0/28" },
+                    "apptiersubnetname": { "value": "EHE2DM-SUB-002" },
+                    "apptiersubnetrange": { "value": "172.24.8.0/24" },
+                    "admintiersubnetname": { "value": "EHE2DM-SUB-003" },
+                    "admintiersubnetrange": { "value": "172.24.14.0/24" },
+                    "datatiersubnetname": { "value": "EHE2DM-SUB-004" },
+                    "datatiersubnetrange": { "value": "172.24.12.0/24" },
+                    "location": { "value": "East US 2" },
+                    "vNETAddressPrefix": { "value": "172.24.0.0/20" },
+                    "vNETName": { "value": "EHE2DM-VNET-001" },
+                    "DNSServerAddress": { "value": [ "172.24.14.1" ] }
                 }
             }
         },
@@ -437,7 +445,7 @@
             "name": "[parameters('adBDCVMName')]",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts',parameters('newStorageAccountName'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts',parameters('VHDStorageAccountName'))]",
                 "[resourceId('Microsoft.Network/networkInterfaces',parameters('adBDCNicName'))]",
                 "[resourceId('Microsoft.Compute/availabilitySets', parameters('adAvailabilitySetName'))]",
                 "[resourceId('Microsoft.Network/loadBalancers',variables('adLBName'))]"
@@ -464,7 +472,7 @@
                     "osDisk": {
                         "name": "osdisk",
                         "vhd": {
-                            "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/vhds1/','osdisk.vhd')]"
+                            "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/vhds1/','osdisk.vhd')]"
                         },
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
@@ -472,7 +480,7 @@
                     "dataDisks": [
                         {
                             "vhd": {
-                                "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/vhds1/', variables('adBDCDataDisk'),'-1.vhd')]"
+                                "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/vhds1/', variables('adBDCDataDisk'),'-1.vhd')]"
                             },
                             "name": "[concat(parameters('adBDCVMName'),'-data-disk1')]",
                             "caching": "None",
