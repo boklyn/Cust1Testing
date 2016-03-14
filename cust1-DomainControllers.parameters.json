@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "VHDStorageAccountName": {
-      "value": "EVHE2DM-STOR-001"
+      "value": "EVHE2DMSTOR001"
     },
     "location": {
       "value": "East US"
@@ -15,7 +15,7 @@
       "value": "172.24.14.1"
     },
     "adBDCNicName": {
-      "value": "EVHE2DM-NICDM002"
+      "value": "EVHE2DM-NIC-002"
     },
     "adBDCNicIPAddress": {
       "value": "172.24.14.2"
