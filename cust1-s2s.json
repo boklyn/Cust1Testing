@@ -143,9 +143,9 @@
                         "name": "vnetGatewayConfig"
                     }
                 ],
-                "gatewayType": "parameters('gatewayType')",
-                "vpnType": "parameters('vpnType')",
-                "enableBgp": "parameters('enableBgp')"        
+                "gatewayType": "Vpn",
+                "vpnType": "PolicyBased",
+                "enableBgp": false
             }
         }
     ]
