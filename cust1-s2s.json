@@ -1,0 +1,152 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "Region where the resources will be deployed"
+            },
+            "defaultValue": "Central US",
+            "allowedValues": [
+                "East US",
+                "West US",
+                "East US 2",
+                "Central US"
+            ]
+        },
+        "enableBgp": {
+            "type": "string",
+            "metadata": {
+                "description": "Enable or disable BGP"
+            },
+            "defaultValue": "false",
+            "allowedValues": [
+                "false"
+            ]
+        },
+        "virtualNetworkName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name for new virtual network"
+            }
+        },
+        "gatewayType": {
+            "type": "string",
+            "metadata": {
+                "description": "VPN or ER"
+            },
+            "defaultValue": "Vpn",
+            "allowedValues": [
+                "Vpn",
+                "ER"
+            ]
+        },
+        "vpnType": {
+            "type": "string",
+            "metadata": {
+                "description": "Route based or policy based"
+            },
+            "defaultValue": "RouteBased",
+            "allowedValues": [
+                "RouteBased",
+                "PolicyBased"
+            ]
+        },
+        "localGatewayName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name for gateway connected to other VNet/on-prem network"
+            }
+        },
+        "localGatewayIpAddress": {
+            "type": "string",
+            "metadata": {
+                "description": "Public IP address for the gateway to connect to (from other VNet/on-prem)"
+            }
+        },
+        "localGatewayAddressPrefix": {
+            "type": "array",
+            "metadata": {
+                "description": "CIDR block for remote network"
+            }
+        },
+        "gatewaySubnet": {
+            "type": "string",
+            "defaultValue": "GatewaySubnet",
+            "metadata": {
+                "description": "Name for gateway subnet in new VNet"
+            },
+            "allowedValues": [
+                "GatewaySubnet"
+            ]
+        },
+        "gatewayPublicIPName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name for public IP object used for the new gateway"
+            }
+        },
+        "gatewayName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name for the new gateway"
+            }
+        }
+    },
+    "variables": {
+        "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
+        "gatewaySubnetRef": "[concat(variables('vnetID'),'/subnets/',parameters('gatewaySubnet'))]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-05-01-preview",
+            "type": "Microsoft.Network/localNetworkGateways",
+            "name": "[parameters('localGatewayName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "localNetworkAddressSpace": {
+                    "addressPrefixes": "[parameters('localGatewayAddressPrefix')]"
+                },
+                "gatewayIpAddress": "[parameters('localGatewayIpAddress')]"
+            }
+        },
+        {
+            "apiVersion": "2015-05-01-preview",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[parameters('gatewayPublicIPName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic"
+            }
+        },
+        {
+            "apiVersion": "2015-05-01-preview",
+            "type": "Microsoft.Network/virtualNetworkGateways",
+            "name": "[parameters('gatewayName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/publicIPAddresses/', parameters('gatewayPublicIPName'))]",
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[variables('gatewaySubnetRef')]"
+                            },
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('gatewayPublicIPName'))]"
+                            }
+                        },
+                        "name": "vnetGatewayConfig"
+                    }
+                ],
+                "gatewayType": "parameters('gatewayType')",
+                "vpnType": "parameters('vpnType')",
+                "enableBgp": "parameters('enableBgp')"        
+            }
+        }
+    ]
+}

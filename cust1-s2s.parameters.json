@@ -1,0 +1,30 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "East US"
+    },
+    "virtualNetworkName": {
+      "value": "EVHE2DM-VNET-001"
+    },
+    "localGatewayName": {
+      "value": "evhe1dm-lng-001"
+    },
+    "localGatewayIpAddress": {
+      "value": "12.97.27.66"
+    },
+    "localGatewayAddressPrefix": {
+      "value": [ "172.16.1.0/24","172.16.32.0/19","172.16.64.0/19","172.16.16.0/22" ]
+    },
+    "gatewayPublicIPName": {
+      "value": "evhe1dm-pip-001"
+    },
+    "gatewayName": {
+      "value": "evhe1dm-vgw-001"
+    },
+    "gatewaySubnet": {
+      "value": "GatewaySubnet"
+    }
+  }
+}
