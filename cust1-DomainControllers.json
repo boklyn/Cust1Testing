@@ -228,9 +228,6 @@
             "name": "[parameters('adBDCNicName')]",
             "type": "Microsoft.Network/networkInterfaces",
             "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks',parameters('vnetname'))]"
-            ],
             "apiVersion": "2015-05-01-preview",
             "properties": {
                 "ipConfigurations": [
