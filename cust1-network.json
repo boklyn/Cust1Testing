@@ -101,8 +101,7 @@
         "apitiersubname": "[concat(parameters('apptiersubnetname'),'_',replace(parameters('apptiersubnetrange'),'/','_'))]",
         "webtiersubname": "[concat(parameters('webtiersubnetname'),'_',replace(parameters('webtiersubnetrange'),'/','_'))]",
         "datatiersubname": "[concat(parameters('datatiersubnetname'),'_',replace(parameters('datatiersubnetrange'),'/','_'))]",
-        "admintiersubname": "[concat(parameters('admintiersubnetname'),'_',replace(parameters('admintiersubnetrange'),'/','_'))]",
-        "gatwaytiersubname": "[concat(parameters('gatewaysubnetname'),'_',replace(parameters('gatewaysubnetrange'),'/','_'))]"
+        "admintiersubname": "[concat(parameters('admintiersubnetname'),'_',replace(parameters('admintiersubnetrange'),'/','_'))]"
     },
     "resources": [
         {
@@ -130,7 +129,7 @@
                         }
                     },
                     {
-                        "name": "[variables('gatwaytiersubname')]",
+                        "name": "[parameters('gatewaySubnetName')]",
                         "properties": {
                             "addressPrefix": "[parameters('gatewaySubnetRange')]"
                         }

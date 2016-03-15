@@ -95,8 +95,8 @@
         "imageOffer": "WindowsServer",
         "windowsOSVersion": "2012-R2-Datacenter",
         "apiVersion": "2015-06-15",
-        "nicName": "domainJoinNIC",
-        "publicIPName": "domainJoinPip",
+        "nicName": "EVHE2DM-NIC-003",
+        "publicIPName": "EVHE2DM-PIP-001",
         "vnetID": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', parameters('existingVNETName'))]",
         "subnetId": "[concat(variables('vnetID'),'/subnets/', parameters('existingSubnetName'))]"
     },
@@ -127,6 +127,9 @@
                         "name": "ipconfig",
                         "properties": {
                             "privateIPAllocationMethod": "Static",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPName'))]"
+                            },
                             "privateIPAddress": "[parameters('vmstaticip')]",
                             "subnet": {
                                 "id": "[variables('subnetId')]"
