@@ -228,6 +228,9 @@
             "name": "[parameters('adBDCNicName')]",
             "type": "Microsoft.Network/networkInterfaces",
             "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks',parameters('vnetname'))]"
+            ],
             "apiVersion": "2015-05-01-preview",
             "properties": {
                 "ipConfigurations": [
@@ -276,7 +279,7 @@
                     "osDisk": {
                         "name": "osdisk",
                         "vhd": {
-                            "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/vhds0/','osdisk.vhd')]"
+                             "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',parameters('VHDStorageAccountName'),'/',parameters('adPDCVMName'),'-1.vhd')]"
                         },
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
@@ -284,7 +287,7 @@
                     "dataDisks": [
                         {
                             "vhd": {
-                                "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/vhds0/', variables('adPDCDataDisk'),'-1.vhd')]"
+                                "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',parameters('VHDStorageAccountName'),'/',parameters('adPDCVMName'),'-2.vhd')]"
                             },
                             "name": "[concat(parameters('adPDCVMName'),'-data-disk1')]",
                             "caching": "None",
@@ -363,7 +366,7 @@
                     "location": { "value": "East US" },
                     "vNETAddressPrefix": { "value": "172.24.0.0/20" },
                     "vNETName": { "value": "EVHE2DM-VNET-001" },
-                    "DNSServerAddress": { "value": ["[parameters('adPDCNicIPAddress')]"] }
+                    "DNSServerAddress": { "value": [ "[parameters('adPDCNicIPAddress')]" ] }
                 }
             }
         },
@@ -441,7 +444,7 @@
                     "osDisk": {
                         "name": "osdisk",
                         "vhd": {
-                            "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/vhds1/','osdisk.vhd')]"
+                            "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',parameters('VHDStorageAccountName'),'/',parameters('adBDCVMName'),'-1.vhd')]"
                         },
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
@@ -449,7 +452,7 @@
                     "dataDisks": [
                         {
                             "vhd": {
-                                "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/vhds1/', variables('adBDCDataDisk'),'-1.vhd')]"
+                               "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',parameters('VHDStorageAccountName'),'/',parameters('adBDCVMName'),'-2.vhd')]"
                             },
                             "name": "[concat(parameters('adBDCVMName'),'-data-disk1')]",
                             "caching": "None",
@@ -536,6 +539,6 @@
                 }
             }
         }
-                
+
     ]
 }
