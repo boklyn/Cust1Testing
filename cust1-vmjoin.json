@@ -163,7 +163,7 @@
                     "osDisk": {
                         "name": "osdisk",
                         "vhd": {
-                            "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',parameters('vmName'),'/',parameters('vmName'),'-1.vhd')]"
+                            "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',toLower(parameters('vmName')),'/',parameters('vmName'),'-1.vhd')]"
                         },
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
@@ -172,7 +172,7 @@
                         {
                             "name": "myvm-data-disk1",
                             "vhd": {
-                                "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',parameters('vmName'),'/',parameters('vmName'),'-2.vhd')]"
+                                "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',toLower(parameters('vmName')),'/',parameters('vmName'),'-2.vhd')]"
                             },
                             "caching": "None",
                             "createOption": "Empty",
