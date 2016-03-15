@@ -15,7 +15,7 @@
       "value": "EVHE2DM-SUB-003_172.24.14.0_24"
     },
     "dnsLabelPrefix": {
-      "value": "EVHE2DM-SVR-003"
+      "value": "evhe2dm-svr-0003"
     },
     "vmSize": {
       "value": "Standard_D2_v2"
