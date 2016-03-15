@@ -9,7 +9,8 @@
             },
             "allowedValues": [
                 "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-network.json",
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-DomainControllers.json"
+                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-DomainControllers.json",
+                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-vmjoin.json"
             ]
         },
         "paramchoice": {
@@ -18,8 +19,9 @@
                 "description": "Different Parameters files choice"
             },
             "allowedValues": [
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-network-parameters.json",
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-DomainControllers.parameters.json"
+                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-network.parameters.json",
+                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-DomainControllers.parameters.json",
+                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-vmjoin.parameters.json"
             ]
         }
 
