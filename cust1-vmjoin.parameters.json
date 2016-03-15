@@ -2,6 +2,12 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "VHDStorageAccountName": {
+      "value": "evhe2dmstor01"
+    },
+    "VMName": {
+      "value": "EVHE2DM-SVR-003"
+    },
     "existingVNETName": {
       "value": "EVHE2DM-VNET-001"
     },
