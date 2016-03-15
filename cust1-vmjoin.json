@@ -129,7 +129,7 @@
                             "privateIPAllocationMethod": "Static",
                             "privateIPAddress": "[parameters('vmstaticip')]",
                             "subnet": {
-                                "id": "[parameters('existingSubnetName')]"
+                                "id": "[variables('subnetId')]"
                             }
                         }
                     }
