@@ -149,7 +149,7 @@
         {
             "apiVersion": "[variables('apiVersion')]",
             "type": "Microsoft.Compute/virtualMachines",
-            "name": "[concat(parameters('webvmnameformat'), copyIndex(parameters('websiteoffset')))]",
+            "name": "[concat(parameters('webvmnameformat'), copyIndex(parameters('websiteoffset'))) ]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset'))))]"
@@ -213,7 +213,7 @@
         {
             "apiVersion": "[variables('apiVersion')]",
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('webvmnameformat'), copyIndex(parameters('websiteoffset'))),'/joindomain')]",
+            "name": "[concat(parameters('webvmnameformat'), copyIndex(parameters('websiteoffset')),'/joindomain')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('webvmnameformat'), copyIndex(parameters('websiteoffset'))))]"
