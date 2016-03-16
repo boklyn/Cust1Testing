@@ -106,7 +106,7 @@
             "defaultValue": "evhe1dm-nic-00"
         },
         "webvmnameformat": {
-            "type": "array",
+            "type": "string",
             "metadata": {
                 "description": "the format computer names of provisioned systems. "
             },
