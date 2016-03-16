@@ -137,7 +137,7 @@
                         "name": "ipconfig",
                         "properties": {
                             "privateIPAllocationMethod": "Static",
-                            "privateIPAddress": "[parameters('vmstaticips')[copyIndex()]]",
+                            "privateIPAddress": "[parameters('webvmstaticips')[copyIndex()]]",
                             "subnet": {
                                 "id": "[variables('subnetId')]"
                             }
