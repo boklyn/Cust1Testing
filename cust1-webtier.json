@@ -1,0 +1,244 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "VHDStorageAccountName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the new storage account created to store the VMs disks. Remmber reccomended max vhd disk is 40"
+            }
+        },
+        "existingVNETName": {
+            "type": "string",
+            "metadata": {
+                "description": "Existing VNET that contains the domain controller"
+            }
+        },
+        "existingSubnetName": {
+            "type": "string",
+            "metadata": {
+                "description": "Existing"
+            }
+        },
+        "webvmSize": {
+            "type": "string",
+            "defaultValue": "Standard_D2_v2",
+            "metadata": {
+                "description": "The size of the virtual machines"
+            }
+        },
+        "domainToJoin": {
+            "type": "string",
+            "metadata": {
+                "description": "The FQDN of the AD domain"
+            }
+        },
+        "domainUsername": {
+            "type": "string",
+            "metadata": {
+                "description": "Username of the account on the domain"
+            }
+        },
+        "domainPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Password of the account on the domain"
+            }
+        },
+        "ouPath": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Specifies an organizational unit (OU) for the domain account. Enter the full distinguished name of the OU in quotation marks. Example: 'OU=testOU; DC=domain; DC=Domain; DC=com'"
+            }
+        },
+        "domainJoinOptions": {
+            "type": "int",
+            "defaultValue": 3,
+            "metadata": {
+                "description": "Set of bit flags that define the join options. Default value of 3 is a combination of NETSETUP_JOIN_DOMAIN (0x00000001) & NETSETUP_ACCT_CREATE (0x00000002) i.e. will join the domain and create the account on the domain. For more information see https://msdn.microsoft.com/en-us/library/aa392154(v=vs.85).aspx"
+            }
+        },
+        "vmAdminUsername": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the administrator of the new VM and the domain. Exclusion list: 'admin','administrator'"
+            }
+        },
+        "vmAdminPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "The password for the administrator account of the new VM and the domain"
+            }
+        },
+        "webvmstaticips": {
+            "type": "array",
+            "metadata": {
+                "description": "static ip address list."
+            }
+        },
+        "websiteoffset": {
+            "type": "int",
+            "metadata": {
+                "description": "the website offsite count number "
+            },
+            "defaultValue": 0
+        },
+        "nicoffset": {
+            "type": "int",
+            "metadata": {
+                "description": "the nic offset count"
+            },
+            "defaultValue": 2
+        },
+        "websitecount": {
+            "type": "int",
+            "metadata": {
+                "description": "number of webtiers to be rpovisioned. "
+            },
+            "defaultValue": 2
+        },
+        "nicnameformat": {
+            "type": "string",
+            "metadata": {
+                "description": "the format of the nic to be provisioned"
+            },
+            "defaultValue": "evhe1dm-nic-00"
+        },
+        "webvmnameformat": {
+            "type": "array",
+            "metadata": {
+                "description": "the format computer names of provisioned systems. "
+            },
+            "defaultValue": "evhe1dm-idwb-00"
+        }
+    },
+    "variables": {
+        "imagePublisher": "MicrosoftWindowsServer",
+        "imageOffer": "WindowsServer",
+        "windowsOSVersion": "2008-R2-SP1",
+        "apiVersion": "2015-06-15",
+        "vnetID": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', parameters('existingVNETName'))]",
+        "subnetId": "[concat(variables('vnetID'),'/subnets/', parameters('existingSubnetName'))]"
+    },
+    "resources": [
+        {
+            "apiVersion": "[variables('apiVersion')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset')))]",
+            "location": "[resourceGroup().location]",
+            "copy": {
+                "name": "niccopy",
+                "count": "[parameters('websitecount')]"
+            },
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[parameters('vmstaticips')[copyIndex()]]",
+                            "subnet": {
+                                "id": "[variables('subnetId')]"
+                            }
+                        }
+                    }
+                ]
+            },
+            "resources": [
+                {
+                    "apiVersion": "[variables('apiVersion')]",
+                    "type": "Microsoft.Compute/virtualMachines",
+                    "name": "[concat(parameters('webvmnameformat'), copyIndex(parameters('websiteoffset')))]",
+                    "location": "[resourceGroup().location]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset'))))]"
+                    ],
+                    "copy": {
+                        "name": "vmcopy",
+                        "count": "[parameters('websitecount')]"
+                    },
+                    "properties": {
+                        "hardwareProfile": {
+                            "vmSize": "[parameters('webvmSize')]"
+                        },
+                        "osProfile": {
+                            "computerName": "[concat(parameters('webvmnameformat'), copyIndex(parameters('websiteoffset')))]",
+                            "adminUsername": "[parameters('vmAdminUsername')]",
+                            "adminPassword": "[parameters('vmAdminPassword')]"
+                        },
+                        "storageProfile": {
+                            "imageReference": {
+                                "publisher": "[variables('imagePublisher')]",
+                                "offer": "[variables('imageOffer')]",
+                                "sku": "[variables('windowsOSVersion')]",
+                                "version": "latest"
+                            },
+                            "osDisk": {
+                                "name": "osdisk",
+                                "vhd": {
+                                    "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',toLower(concat(parameters('webvmnameformat'), copyIndex(parameters('websiteoffset')))),'/',concat(parameters('webvmnameformat'), copyIndex(parameters('websiteoffset'))),'-1.vhd')]"
+                                },
+                                "caching": "ReadWrite",
+                                "createOption": "FromImage"
+                            },
+                            "dataDisks": [
+                                {
+                                    "name": "myvm-data-disk1",
+                                    "vhd": {
+                                        "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',toLower(concat(parameters('webvmnameformat'), copyIndex(parameters('websiteoffset')))),'/',concat(parameters('webvmnameformat'), copyIndex(parameters('websiteoffset'))),'-2.vhd')]"
+                                    },
+                                    "caching": "None",
+                                    "createOption": "Empty",
+                                    "diskSizeGB": "100",
+                                    "lun": 0
+                                }
+                            ]
+                        },
+                        "networkProfile": {
+                            "networkInterfaces": [
+                                {
+                                    "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset'))))]"
+                                }
+                            ]
+                        },
+                        "diagnosticsProfile": {
+                            "bootDiagnostics": {
+                                "enabled": "true",
+                                "storageUri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net')]"
+                            }
+                        }
+                    }
+                },
+                {
+                    "apiVersion": "[variables('apiVersion')]",
+                    "type": "Microsoft.Compute/virtualMachines/extensions",
+                    "name": "[concat(parameters('webvmnameformat'), copyIndex(parameters('websiteoffset'))),'/joindomain')]",
+                    "location": "[resourceGroup().location]",
+                    "dependsOn": [
+                        "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('webvmnameformat'), copyIndex(parameters('websiteoffset'))))]"
+                    ],
+                    "copy": {
+                        "name": "domainjoincopy",
+                        "count": "[parameters('websitecount')]"
+                    },
+                    "properties": {
+                        "publisher": "Microsoft.Compute",
+                        "type": "JsonADDomainExtension",
+                        "typeHandlerVersion": "1.0",
+                        "settings": {
+                            "Name": "[parameters('domainToJoin')]",
+                            "OUPath": "[parameters('ouPath')]",
+                            "User": "[concat(parameters('domainToJoin'), '\\', parameters('domainUsername'))]",
+                            "Restart": "true",
+                            "Options": "[parameters('domainJoinOptions')]"
+                        },
+                        "protectedsettings": {
+                            "Password": "[parameters('domainPassword')]"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
