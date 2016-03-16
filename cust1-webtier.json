@@ -110,7 +110,7 @@
             "metadata": {
                 "description": "the format computer names of provisioned systems. "
             },
-            "defaultValue": "evhe1dm-idwb-00"
+            "defaultValue": "evhe1dm-wb-00"
         }
     },
     "variables": {
