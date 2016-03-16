@@ -89,7 +89,7 @@
             "metadata": {
                 "description": "the nic offset count"
             },
-            "defaultValue": 2
+            "defaultValue": 4
         },
         "websitecount": {
             "type": "int",
@@ -103,7 +103,7 @@
             "metadata": {
                 "description": "the format of the nic to be provisioned"
             },
-            "defaultValue": "evhe1dm-nic-00"
+            "defaultValue": "evhe1dm-nic-0"
         },
         "webvmnameformat": {
             "type": "string",
