@@ -14,8 +14,8 @@
         "existingSubnetName": {
             "value": "EVHE2DM-SUB-001_172.24.2.0_24"
         },
-        "webvmSize": {
-            "value": "Standard_D3_v2"
+        "appvmSizes": {
+            "value": [ "Standard_D3_v2", "Standard_D3_v2",]
         },
         "domainToJoin": {
             "value": "azureqa.corp.evolenthealth.com"

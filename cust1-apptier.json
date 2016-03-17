@@ -159,7 +159,7 @@
             },
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "[parameters('appvmSize')]"
+                    "vmSize": "[parameters('appvmSizes')[copyIndex()]]"
                 },
                 "osProfile": {
                     "computerName": "[concat(parameters('appvmnameformat'), copyIndex(parameters('appsiteoffset')))]",
