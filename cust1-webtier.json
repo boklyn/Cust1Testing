@@ -82,7 +82,7 @@
             "metadata": {
                 "description": "the website offsite count number "
             },
-            "defaultValue": 0
+            "defaultValue": 1
         },
         "nicoffset": {
             "type": "int",
