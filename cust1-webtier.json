@@ -26,6 +26,13 @@
                 "description": "Existing"
             }
         },
+        "webAvailabilitySetName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the availability set that the WEB VM is created in"
+            },
+            "defaultValue": "evhe1dm-avset-002"
+        },
         "webvmSize": {
             "type": "string",
             "defaultValue": "Standard_D2_v2",
@@ -153,12 +160,19 @@
             }
         },
         {
+            "type": "Microsoft.Compute/availabilitySets",
+            "name": "[parameters('webAvailabilitySetName')]",
+            "apiVersion": "2015-05-01-preview",
+            "location": "[resourceGroup().location]"
+        },
+        {
             "apiVersion": "[variables('apiVersion')]",
             "type": "Microsoft.Compute/virtualMachines",
             "name": "[concat(parameters('webvmnameformat'), copyIndex(parameters('websiteoffset'))) ]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset'))))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset'))))]",
+                "[resourceId('Microsoft.Compute/availabilitySets', parameters('webAvailabilitySetName'))]"
             ],
             "copy": {
                 "name": "vmcopy",
@@ -172,6 +186,9 @@
                     "computerName": "[concat(parameters('webvmnameformat'), copyIndex(parameters('websiteoffset')))]",
                     "adminUsername": "[parameters('vmAdminUsername')]",
                     "adminPassword": "[parameters('vmAdminPassword')]"
+                },
+                "availabilitySet": {
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('webAvailabilitySetName'))]"
                 },
                 "storageProfile": {
                     "imageReference": {

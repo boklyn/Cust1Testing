@@ -88,10 +88,10 @@
             }
         },
         "DNSServerAddress": {
-          "type": "array",
-          "metadata": {
-            "Description": "The DNS address(es) of the DNS Server(s) used by the VNET"
-          }
+            "type": "array",
+            "metadata": {
+                "Description": "The DNS address(es) of the DNS Server(s) used by the VNET"
+            }
         }
     },
     "variables": {
@@ -114,6 +114,9 @@
                     "addressPrefixes": [
                         "[parameters('vNETAddressPrefix')]"
                     ]
+                },
+                "dhcpOptions": {
+                    "dnsServers": "[parameters('DNSServerAddress')]"
                 },
                 "subnets": [
                     {
@@ -139,7 +142,7 @@
                         "properties": {
                             "addressPrefix": "[parameters('datatiersubnetrange')]"
                         }
-                    },  
+                    },
                     {
                         "name": "[variables('admintiersubname')]",
                         "properties": {
