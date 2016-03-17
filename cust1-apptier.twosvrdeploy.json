@@ -14,10 +14,28 @@
                 "description": "Existing VNET that contains the domain controller"
             }
         },
+        "vnetrgpname": {
+            "type": "string",
+            "metadata": {
+                "description": "Resource group where the vnet is located. "
+            }
+        },
         "existingSubnetName": {
             "type": "string",
             "metadata": {
                 "description": "Existing"
+            }
+        },
+        "webAvailabilitySetName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the availability set that the WEB VM is created in"
+            }
+        },
+        "webvmSize": {
+            "type": "string",
+            "metadata": {
+                "description": "The size of the virtual machines"
             }
         },
         "domainToJoin": {
@@ -64,57 +82,40 @@
                 "description": "The password for the administrator account of the new VM and the domain"
             }
         },
-        "appvmstaticips": {
+        "webvmstaticips": {
             "type": "array",
             "metadata": {
                 "description": "static ip address list."
             }
         },
-        "appsiteoffset": {
+        "websiteoffset": {
             "type": "int",
             "metadata": {
                 "description": "the website offsite count number "
-            },
-            "defaultValue": 1
+            }
         },
         "nicoffset": {
             "type": "int",
             "metadata": {
                 "description": "the nic offset count"
-            },
-            "defaultValue": 3
+            }
         },
-        "appsiteoffset": {
+        "sitecount": {
             "type": "int",
             "metadata": {
                 "description": "number of webtiers to be rpovisioned. "
-            },
-            "defaultValue": 2
+            }
         },
         "nicnameformat": {
             "type": "string",
             "metadata": {
                 "description": "the format of the nic to be provisioned"
-            },
-            "defaultValue": "evhe1dm-nic-0"
+            }
         },
-        "appvmnameformat": {
+        "vmnameformat": {
             "type": "string",
             "metadata": {
                 "description": "the format computer names of provisioned systems. "
-            },
-            "defaultValue": "evhe1dm-idap-0"
-        },
-        "appvmSizes": {
-            "type": "array",
-            "metadata": {
-                "description": "The size of the virtual machines"
-            }
-        },
-        "vnetrgpname": {
-            "type": "string",
-            "metadata": {
-                "description": "Resource group where the vnet is located. "
             }
         }
     },
@@ -134,7 +135,7 @@
             "location": "[resourceGroup().location]",
             "copy": {
                 "name": "niccopy",
-                "count": "[parameters('appsiteoffset')]"
+                "count": "[parameters('sitecount')]"
             },
             "properties": {
                 "ipConfigurations": [
@@ -142,7 +143,7 @@
                         "name": "ipconfig",
                         "properties": {
                             "privateIPAllocationMethod": "Static",
-                            "privateIPAddress": "[parameters('appvmstaticips')[copyIndex()]]",
+                            "privateIPAddress": "[parameters('webvmstaticips')[copyIndex()]]",
                             "subnet": {
                                 "id": "[variables('subnetId')]"
                             }
@@ -152,25 +153,35 @@
             }
         },
         {
+            "type": "Microsoft.Compute/availabilitySets",
+            "name": "[parameters('webAvailabilitySetName')]",
+            "apiVersion": "2015-05-01-preview",
+            "location": "[resourceGroup().location]"
+        },
+        {
             "apiVersion": "[variables('apiVersion')]",
             "type": "Microsoft.Compute/virtualMachines",
-            "name": "[concat(parameters('appvmnameformat'), copyIndex(parameters('appsiteoffset'))) ]",
+            "name": "[concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset'))) ]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset'))))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset'))))]",
+                "[resourceId('Microsoft.Compute/availabilitySets', parameters('webAvailabilitySetName'))]"
             ],
             "copy": {
                 "name": "vmcopy",
-                "count": "[parameters('appsiteoffset')]"
+                "count": "[parameters('sitecount')]"
             },
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "[parameters('appvmSizes')[copyIndex()]]"
+                    "vmSize": "[parameters('webvmSize')]"
                 },
                 "osProfile": {
-                    "computerName": "[concat(parameters('appvmnameformat'), copyIndex(parameters('appsiteoffset')))]",
+                    "computerName": "[concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset')))]",
                     "adminUsername": "[parameters('vmAdminUsername')]",
                     "adminPassword": "[parameters('vmAdminPassword')]"
+                },
+                "availabilitySet": {
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('webAvailabilitySetName'))]"
                 },
                 "storageProfile": {
                     "imageReference": {
@@ -182,7 +193,7 @@
                     "osDisk": {
                         "name": "osdisk",
                         "vhd": {
-                            "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',toLower(concat(parameters('appvmnameformat'), copyIndex(parameters('appsiteoffset')))),'/',concat(parameters('appvmnameformat'), copyIndex(parameters('appsiteoffset'))),'-1.vhd')]"
+                            "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',toLower(concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset')))),'/',concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset'))),'-1.vhd')]"
                         },
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
@@ -191,7 +202,7 @@
                         {
                             "name": "myvm-data-disk1",
                             "vhd": {
-                                "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',toLower(concat(parameters('appvmnameformat'), copyIndex(parameters('appsiteoffset')))),'/',concat(parameters('appvmnameformat'), copyIndex(parameters('appsiteoffset'))),'-2.vhd')]"
+                                "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',toLower(concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset')))),'/',concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset'))),'-2.vhd')]"
                             },
                             "caching": "None",
                             "createOption": "Empty",
@@ -218,14 +229,14 @@
         {
             "apiVersion": "[variables('apiVersion')]",
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('appvmnameformat'), copyIndex(parameters('appsiteoffset')),'/joindomain')]",
+            "name": "[concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset')),'/joindomain')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('appvmnameformat'), copyIndex(parameters('appsiteoffset'))))]"
+                "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset'))))]"
             ],
             "copy": {
                 "name": "domainjoincopy",
-                "count": "[parameters('appsiteoffset')]"
+                "count": "[parameters('sitecount')]"
             },
             "properties": {
                 "publisher": "Microsoft.Compute",
