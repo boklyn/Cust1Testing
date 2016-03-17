@@ -42,10 +42,10 @@
             "value": "P@ssword!"
         },
         "webvmstaticips": {
-            "value": [ "172.24.8.7", "172.24.8.8" ]
+            "value": [ "172.24.8.8", "172.24.8.9" ]
         },
         "websiteoffset": {
-            "value": 5
+            "value": 1
         },
         "nicoffset": {
             "value": 7
