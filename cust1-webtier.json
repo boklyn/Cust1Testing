@@ -118,7 +118,7 @@
         "imageOffer": "WindowsServer",
         "windowsOSVersion": "2008-R2-SP1",
         "apiVersion": "2015-06-15",
-        "vnetID": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', parameters('existingVNETName'))]",
+        "vnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('existingVNETName'))]",
         "subnetId": "[concat(variables('vnetID'),'/subnets/', parameters('existingSubnetName'))]"
     },
     "resources": [
