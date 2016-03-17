@@ -10,8 +10,9 @@
             "allowedValues": [
                 "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-network.json",
                 "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-DomainControllers.json",
+                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-s2s.json",
                 "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-webtier.json",
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-s2s.json"
+                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-apptier.json"
             ]
         },
         "paramchoice": {
@@ -22,8 +23,9 @@
             "allowedValues": [
                 "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-network.parameters.json",
                 "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-DomainControllers.parameters.json",
+                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-s2s.parameters.json",
                 "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-webtier.parameters.json",
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-s2s.parameters.json"
+                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-apptier.parameters.json"
             ]
         }
 

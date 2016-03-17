@@ -1,0 +1,42 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "webvmstaticips": {
+            "value": [ "172.24.2.6", "172.24.2.7" ]
+        },
+        "VHDStorageAccountName": {
+            "value": "evhe2dmstor01"
+        },
+        "existingVNETName": {
+            "value": "EVHE2DM-VNET-001"
+        },
+        "existingSubnetName": {
+            "value": "EVHE2DM-SUB-001_172.24.2.0_24"
+        },
+        "webvmSize": {
+            "value": "Standard_D3_v2"
+        },
+        "domainToJoin": {
+            "value": "azureqa.corp.evolenthealth.com"
+        },
+        "domainUsername": {
+            "value": "evoadmin"
+        },
+        "domainPassword": {
+            "value": "iVcMpEhwVkOUdIQP4xFx"
+        },
+        "ouPath": {
+            "value": ""
+        },
+        "domainJoinOptions": {
+            "value": 3
+        },
+        "vmAdminUsername": {
+            "value": "evollocaladmin"
+        },
+        "vmAdminPassword": {
+            "value": "P@ssword!"
+        }
+    }
+}
