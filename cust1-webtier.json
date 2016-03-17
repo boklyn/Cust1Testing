@@ -14,6 +14,12 @@
                 "description": "Existing VNET that contains the domain controller"
             }
         },
+        "vnetrgpname": {
+            "type": "string",
+            "metadata": {
+                "description": "Resource group where the vnet is located. "
+            }
+        },
         "existingSubnetName": {
             "type": "string",
             "metadata": {
@@ -118,7 +124,7 @@
         "imageOffer": "WindowsServer",
         "windowsOSVersion": "2012-R2-Datacenter",
         "apiVersion": "2015-06-15",
-        "vnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('existingVNETName'))]",
+        "vnetID": "[parameters('vnetrgpname'), 'Microsoft.Network/virtualNetworks', parameters('existingVNETName'))]",
         "subnetId": "[concat(variables('vnetID'),'/subnets/', parameters('existingSubnetName'))]"
     },
     "resources": [

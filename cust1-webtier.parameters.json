@@ -11,6 +11,9 @@
         "existingVNETName": {
             "value": "EVHE2DM-VNET-001"
         },
+        "vnetrgpname": {
+            "value": "EVHE1-RGP-001"
+        },
         "existingSubnetName": {
             "value": "EVHE2DM-SUB-001_172.24.2.0_24"
         },
