@@ -221,7 +221,7 @@
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
                         "enabled": "true",
-                        "storageUri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net')]"
+                        "storageUri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',toLower(concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset')))))]"
                     }
                 }
             }
