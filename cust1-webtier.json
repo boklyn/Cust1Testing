@@ -124,7 +124,7 @@
         "imageOffer": "WindowsServer",
         "windowsOSVersion": "2012-R2-Datacenter",
         "apiVersion": "2015-06-15",
-        "vnetID": "[parameters('vnetrgpname'), 'Microsoft.Network/virtualNetworks', parameters('existingVNETName'))]",
+        "vnetID": "[resourceId(parameters('vnetrgpname'), 'Microsoft.Network/virtualNetworks', parameters('existingVNETName'))]",
         "subnetId": "[concat(variables('vnetID'),'/subnets/', parameters('existingSubnetName'))]"
     },
     "resources": [
