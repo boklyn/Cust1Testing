@@ -179,7 +179,7 @@
         "adSubnetRef": "[concat(variables('VnetID'),'/subnets/',parameters('adSubName'))]",
         "adPDCDataDisk": "EVHADPDCDataDisk",
         "adBDCDataDisk": "EVHADBDCDataDisk",
-        "adDataDiskSize": 1000,
+        "adDataDiskSize": 200,
         "adPDCModulesURL": "[concat(parameters('assetLocation'),'CreateADPDC.ps1.zip')]",
         "adPDCConfigurationFunction": "CreateADPDC.ps1\\CreateADPDC",
         "adBDCConfigurationFunction": "CreateADBDC.ps1\\CreateADBDC",
