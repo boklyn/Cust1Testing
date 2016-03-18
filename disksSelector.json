@@ -51,14 +51,6 @@
                 "description": "folder path to be created. "
             }
         },
-        "diskSizeGB": {
-            "type": "int",
-            "minValue": 1,
-            "maxValue": 1023,
-            "metadata": {
-                "description": "Size of the data disks"
-            }
-        },
         "disksizes": {
             "type": "array",
             "metadata": {
