@@ -144,7 +144,8 @@
         "apiVersion": "2015-06-15",
         "diskCaching": "ReadWrite",
         "vnetID": "[resourceId(parameters('vnetrgpname'), 'Microsoft.Network/virtualNetworks', parameters('existingVNETName'))]",
-        "subnetId": "[concat(variables('vnetID'),'/subnets/', parameters('existingSubnetName'))]"
+        "subnetId": "[concat(variables('vnetID'),'/subnets/', parameters('existingSubnetName'))]",
+        "snumstring": "[concat('', parameters('numdatadisks'))]"
     },
     "resources": [
         {
@@ -183,7 +184,7 @@
                 },
                 "parameters": {
                     "numDataDisks": {
-                        "value": "1"
+                        "value": "[variables('snumstring')]"
                     },
                     "diskStorageAccountName": {
                         "value": "[parameters('VHDStorageAccountName')]"
