@@ -174,7 +174,7 @@
         },
         {
             "apiVersion": "2015-01-01",
-            "name": "[concat('diskselection-', copyIndex())]",
+            "name": "diskselection",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
@@ -193,16 +193,15 @@
                         "value": "[variables('diskCaching')]"
                     },
                     "diskSizeGB": {
-                        "value": "[parameters('disksizes')[copyIndex()]]"
+                        "value": 100
                     },
                     "folderpath": {
-                        "value": "[concat(toLower(concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset')))),'/')]"
+                        "value": "[concat(toLower(parameters('vmnameformat')),'1/')]"
+                    },
+                    "disksizes": {
+                        "value": "[parameters('disksizes')]"
                     }
                 }
-            },
-            "copy": {
-                "name": "diskcopy",
-                "count": "[parameters('numdatadisks')]"
             }
         },
         {
