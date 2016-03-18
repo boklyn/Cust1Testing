@@ -194,6 +194,9 @@
                     },
                     "diskSizeGB": {
                         "value": "[parameters('disksizes')[copyIndex()]]"
+                    },
+                    "folderpath": {
+                        "value": "[concat(toLower(concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset')))),'/')]"
                     }
                 }
             },

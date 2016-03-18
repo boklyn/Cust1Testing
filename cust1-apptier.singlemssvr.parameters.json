@@ -1,0 +1,72 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "VHDStorageAccountName": {
+            "value": "evhe2dmstor01"
+        },
+        "existingVNETName": {
+            "value": "EVHE2DM-VNET-001"
+        },
+        "vnetrgpname": {
+            "value": "EVHE1-RGP-001"
+        },
+        "existingSubnetName": {
+            "value": "EVHE2DM-SUB-002_172.24.8.0_24"
+        },
+        "webAvailabilitySetName": {
+            "value": "evhe1dm-avset-003"
+        },
+        "webvmSize": {
+            "value": "Standard_D2"
+        },
+        "domainToJoin": {
+            "value": "azureqa.corp.evolenthealth.com"
+        },
+        "domainUsername": {
+            "value": "evoadmin"
+        },
+        "domainPassword": {
+            "value": "iVcMpEhwVkOUdIQP4xFx"
+        },
+        "ouPath": {
+            "value": ""
+        },
+        "domainJoinOptions": {
+            "value": 3
+        },
+        "vmAdminUsername": {
+            "value": "evollocaladmin"
+        },
+        "vmAdminPassword": {
+            "value": "P@ssword!"
+        },
+        "webvmstaticips": {
+            "value": [ "172.24.8.11" ]
+        },
+        "websiteoffset": {
+            "value": 1
+        },
+        "nicoffset": {
+            "value": 10
+        },
+        "sitecount": {
+            "value": 1
+        },
+        "nicnameformat": {
+            "value": "evhe1dm-nic-0"
+        },
+        "vmnameformat": {
+            "value": "evhe1dm-msap-0"
+        },
+        "assetLocation": {
+            "value": "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/"
+        },
+        "disksizes": {
+            "value": [ 100, 100 ]
+        },
+        "numdatadisks": {
+            "value": 2
+        }
+    }
+}
