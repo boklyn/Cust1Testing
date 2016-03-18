@@ -1,65 +1,71 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "numDataDisks": {
-      "type": "string",
-      "allowedValues": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14",
-        "15",
-        "16",
-        "32",
-        "64"
-      ],
-      "metadata": {
-        "description": "This parameter allows the user to select the number of disks they want"
-      }
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "numDataDisks": {
+            "type": "string",
+            "allowedValues": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "32",
+                "64"
+            ],
+            "metadata": {
+                "description": "This parameter allows the user to select the number of disks they want"
+            }
+        },
+        "diskStorageAccountName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the storage account where the data disks are stored"
+            }
+        },
+        "diskCaching": {
+            "type": "string",
+            "allowedValues": [
+                "None",
+                "ReadOnly",
+                "ReadWrite"
+            ],
+            "metadata": {
+                "description": "Caching type for the data disks"
+            }
+        },
+        "folderpath": {
+            "type": "string",
+            "metadata": {
+                "description": "folder path to be created. "
+            }
+        },
+        "diskSizeGB": {
+            "type": "int",
+            "minValue": 1,
+            "maxValue": 1023,
+            "metadata": {
+                "description": "Size of the data disks"
+            }
+        },
+        "disksizes": {
+            "type": "array",
+            "metadata": {
+                "description": "represents the disk sizes. "
+            }
+        }
     },
-    "diskStorageAccountName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of the storage account where the data disks are stored"
-      }
-    },
-    "diskCaching": {
-      "type": "string",
-      "allowedValues": [
-        "None",
-        "ReadOnly",
-        "ReadWrite"
-      ],
-      "metadata": {
-        "description": "Caching type for the data disks"
-      }
-    },
-    "folderpath": {
-      "type": "string",
-      "metadata": {
-        "description": "folder path to be created. "
-      }
-    },
-    "diskSizeGB": {
-      "type": "int",
-      "minValue": 1,
-      "maxValue": 1023,
-      "metadata": {
-        "description": "Size of the data disks"
-      }
-    }
-  },
   "variables": {
     "_comment1": "disksArray is ugly :( but it gets the job done. If anyone can make it better, please do!",
     "disksArray": {
@@ -92,7 +98,7 @@
           },
           "createOption": "Empty",
           "caching": "[parameters('diskCaching')]",
-          "diskSizeGB": "[parameters('diskSizeGB')]"
+          "diskSizeGB": "[parameters('disksizes')[0]]"
         }
       ],
       "2": [
@@ -104,7 +110,7 @@
           },
           "createOption": "Empty",
           "caching": "[parameters('diskCaching')]",
-          "diskSizeGB": "[parameters('diskSizeGB')]"
+          "diskSizeGB": "[parameters('disksizes')[1]]"
         }
       ],
       "3": [
