@@ -192,9 +192,6 @@
                     "diskCaching": {
                         "value": "[variables('diskCaching')]"
                     },
-                    "diskSizeGB": {
-                        "value": 100
-                    },
                     "folderpath": {
                         "value": "[concat(toLower(parameters('vmnameformat')),'1/')]"
                     },

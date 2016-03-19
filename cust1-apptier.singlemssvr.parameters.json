@@ -67,6 +67,9 @@
         },
         "numdatadisks": {
             "value": 2
+        },
+        "diskSizeGB": {
+            "value": 100
         }
     }
 }
