@@ -98,7 +98,7 @@
           },
           "createOption": "Empty",
           "caching": "[parameters('diskCaching')]",
-          "diskSizeGB": "[parameters('disksizes')[1]]"
+          "diskSizeGB": 100
         }
       ],
       "2": [
