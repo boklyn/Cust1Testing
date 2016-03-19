@@ -184,7 +184,7 @@
                 },
                 "parameters": {
                     "numDataDisks": {
-                        "value": "[variables('snumstring')]"
+                        "value": "1"
                     },
                     "diskStorageAccountName": {
                         "value": "[parameters('VHDStorageAccountName')]"
