@@ -98,7 +98,7 @@
           },
           "createOption": "Empty",
           "caching": "[parameters('diskCaching')]",
-          "diskSizeGB": 100
+          "diskSizeGB": 200
         }
       ],
       "2": [
@@ -110,7 +110,7 @@
           },
           "createOption": "Empty",
           "caching": "[parameters('diskCaching')]",
-          "diskSizeGB": "[parameters('diskSizeGB')]"
+          "diskSizeGB": 100
         }
       ],
       "3": [
@@ -122,7 +122,7 @@
           },
           "createOption": "Empty",
           "caching": "[parameters('diskCaching')]",
-          "diskSizeGB": "[parameters('diskSizeGB')]"
+          "diskSizeGB": 100
         }
       ],
       "4": [
@@ -134,7 +134,7 @@
           },
           "createOption": "Empty",
           "caching": "[parameters('diskCaching')]",
-          "diskSizeGB": "[parameters('diskSizeGB')]"
+          "diskSizeGB": 100
         }
       ],
       "5": [

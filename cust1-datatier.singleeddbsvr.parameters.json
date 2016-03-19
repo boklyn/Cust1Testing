@@ -42,13 +42,13 @@
             "value": "P@ssword!"
         },
         "webvmstaticips": {
-            "value": [ "172.24.12.4" ]
+            "value": [ "172.24.12.6" ]
         },
         "websiteoffset": {
             "value": 1
         },
         "nicoffset": {
-            "value": 14
+            "value": 16
         },
         "sitecount": {
             "value": 1
@@ -57,7 +57,7 @@
             "value": "evhe1dm-nic-"
         },
         "vmnameformat": {
-            "value": "evhe1dm-sqdw-0"
+            "value": "evhe1dm-ewdb-0"
         },
         "assetLocation": {
             "value": "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/"
