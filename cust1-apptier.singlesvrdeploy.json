@@ -197,6 +197,9 @@
                     },
                     "disksizes": {
                         "value": "[parameters('disksizes')]"
+                    },
+                    "diskSizeGB": {
+                        "value": 100
                     }
                 }
             }
@@ -228,9 +231,6 @@
                     "computerName": "[concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset')))]",
                     "adminUsername": "[parameters('vmAdminUsername')]",
                     "adminPassword": "[parameters('vmAdminPassword')]"
-                },
-                "availabilitySet": {
-                    "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('webAvailabilitySetName'))]"
                 },
                 "storageProfile": {
                     "imageReference": {

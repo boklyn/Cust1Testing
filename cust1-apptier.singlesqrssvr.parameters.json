@@ -18,7 +18,7 @@
             "value": "evhe1dm-avset-003"
         },
         "webvmSize": {
-            "value": "Standard_DS11"
+            "value": "Standard_DS2"
         },
         "domainToJoin": {
             "value": "azureqa.corp.evolenthealth.com"
@@ -42,31 +42,31 @@
             "value": "P@ssword!"
         },
         "webvmstaticips": {
-            "value": [ "172.24.8.11" ]
+            "value": [ "172.24.8.14" ]
         },
         "websiteoffset": {
             "value": 1
         },
         "nicoffset": {
-            "value": 10
+            "value": 13
         },
         "sitecount": {
             "value": 1
         },
         "nicnameformat": {
-            "value": "evhe1dm-nic-0"
+            "value": "evhe1dm-nic-"
         },
         "vmnameformat": {
-            "value": "evhe1dm-msap-0"
+            "value": "evhe1dm-sqrs-0"
         },
         "assetLocation": {
             "value": "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/"
         },
         "disksizes": {
-            "value": [ 100, 100 ]
+            "value": [ 200, 100, 100, 100 ]
         },
         "numdatadisks": {
-            "value": 2
+            "value": 4
         }
     }
 }
