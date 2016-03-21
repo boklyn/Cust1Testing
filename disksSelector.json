@@ -99,14 +99,14 @@
             ],
             "4": [
                 {
-                    "name": "datadisk4",
-                    "lun": 3,
+                    "name": "datadisk3",
+                    "lun": 2,
                     "vhd": {
-                        "uri": "[concat('http://', parameters('diskStorageAccountName'),'.blob.core.windows.net/', parameters('folderpath'), 'datadisk4.vhd')]"
+                        "uri": "[concat('http://', parameters('diskStorageAccountName'),'.blob.core.windows.net/', parameters('folderpath'), 'datadisk3.vhd')]"
                     },
                     "createOption": "Empty",
                     "caching": "[parameters('diskCaching')]",
-                    "diskSizeGB": "[parameters('disksizes')[3]]"
+                    "diskSizeGB": "[parameters('disksizes')[2]]"
                 }
             ],
             "5": [
