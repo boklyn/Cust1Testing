@@ -151,19 +151,15 @@
         {
             "apiVersion": "[variables('apiVersion')]",
             "type": "Microsoft.Network/networkInterfaces",
-            "name": "[concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset')))]",
+            "name": "[concat(parameters('nicnameformat'), parameters('nicoffset'))]",
             "location": "[resourceGroup().location]",
-            "copy": {
-                "name": "niccopy",
-                "count": "[parameters('sitecount')]"
-            },
             "properties": {
                 "ipConfigurations": [
                     {
                         "name": "ipconfig",
                         "properties": {
                             "privateIPAllocationMethod": "Static",
-                            "privateIPAddress": "[parameters('webvmstaticips')[copyIndex()]]",
+                            "privateIPAddress": "[parameters('webvmstaticips')[0]]",
                             "subnet": {
                                 "id": "[variables('subnetId')]"
                             }
@@ -205,30 +201,19 @@
             }
         },
         {
-            "type": "Microsoft.Compute/availabilitySets",
-            "name": "[parameters('webAvailabilitySetName')]",
-            "apiVersion": "2015-05-01-preview",
-            "location": "[resourceGroup().location]"
-        },
-        {
             "apiVersion": "[variables('apiVersion')]",
             "type": "Microsoft.Compute/virtualMachines",
-            "name": "[concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset'))) ]",
+            "name": "[concat(parameters('vmnameformat'),parameters('websiteoffset'))]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset'))))]",
-                "[resourceId('Microsoft.Compute/availabilitySets', parameters('webAvailabilitySetName'))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('nicnameformat'), parameters('nicoffset')))]"
             ],
-            "copy": {
-                "name": "vmcopy",
-                "count": "[parameters('sitecount')]"
-            },
             "properties": {
                 "hardwareProfile": {
                     "vmSize": "[parameters('webvmSize')]"
                 },
                 "osProfile": {
-                    "computerName": "[concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset')))]",
+                    "computerName": "[concat(parameters('vmnameformat'), parameters('websiteoffset'))]",
                     "adminUsername": "[parameters('vmAdminUsername')]",
                     "adminPassword": "[parameters('vmAdminPassword')]"
                 },
@@ -242,7 +227,7 @@
                     "osDisk": {
                         "name": "osdisk",
                         "vhd": {
-                            "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',toLower(concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset')))),'/',concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset'))),'-1.vhd')]"
+                            "uri": "[concat('http://',parameters('VHDStorageAccountName'),'.blob.core.windows.net/',toLower(concat(parameters('vmnameformat'), parameters('websiteoffset'))),'/',concat(parameters('vmnameformat'), parameters('websiteoffset')),'-1.vhd')]"
                         },
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
@@ -252,7 +237,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('nicnameformat'), copyIndex(parameters('nicoffset'))))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('nicnameformat'), parameters('nicoffset')))]"
                         }
                     ]
                 },
@@ -267,15 +252,11 @@
         {
             "apiVersion": "[variables('apiVersion')]",
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset')),'/joindomain')]",
+            "name": "[concat(parameters('vmnameformat'), parameters('websiteoffset'),'/joindomain')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('vmnameformat'), copyIndex(parameters('websiteoffset'))))]"
+                "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('vmnameformat'), parameters('websiteoffset')))]"
             ],
-            "copy": {
-                "name": "domainjoincopy",
-                "count": "[parameters('sitecount')]"
-            },
             "properties": {
                 "publisher": "Microsoft.Compute",
                 "type": "JsonADDomainExtension",
