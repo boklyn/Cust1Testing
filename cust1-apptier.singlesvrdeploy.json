@@ -193,9 +193,6 @@
                     },
                     "disksizes": {
                         "value": "[parameters('disksizes')]"
-                    },
-                    "diskSizeGB": {
-                        "value": 100
                     }
                 }
             }
