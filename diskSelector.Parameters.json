@@ -1,0 +1,24 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "numDataDisks": {
+            "value": "4"
+        },
+        "diskStorageAccountName": {
+            "value": "evhe2dmstor01"
+        },
+        "diskCaching": {
+            "value": "ReadWrite"
+        },
+        "diskSizeGB": {
+            "value": 100
+        },
+        "folderpath": {
+            "value": "bingo/"
+        },
+        "disksizes": {
+            "value": [ 200, 100, 100, 100 ]
+        }
+    }
+}

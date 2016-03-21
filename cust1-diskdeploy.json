@@ -185,6 +185,10 @@
         "dataDiskArray": {
             "type": "string",
             "value": "[reference('diskselection').outputs.dataDiskArray.value]"
+        },
+        "dataDiskArraynew": {
+            "type": "string",
+            "value": "[concat('-',variables('snumstring'),'-')]"
         }
     }
 }
