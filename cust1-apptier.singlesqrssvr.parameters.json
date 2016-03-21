@@ -68,5 +68,11 @@
         "numdatadisks": {
             "value": 4
         }
+    },
+    "outputs": {
+        "dataDiskArray": {
+            "type": "array",
+            "value": "[variables('disksArray')[parameters('numDataDisks')]]"
+        }
     }
 }
