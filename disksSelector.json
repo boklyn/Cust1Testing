@@ -204,11 +204,12 @@
             ]
         }
     },
-        "resources": [ ],
-        "outputs": {
-            "dataDiskArray": {
-                "type": "string",
-                "value": "[variables('disksArray')['3'][0]"
-            }
+
+    "resources": [ ],
+    "outputs": {
+        "dataDiskArray": {
+            "type": "string",
+            "value": "[variables('disksArray')[parameters('numDataDisks')]]"
         }
     }
+}
