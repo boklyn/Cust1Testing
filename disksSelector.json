@@ -106,7 +106,7 @@
                     },
                     "createOption": "Empty",
                     "caching": "[parameters('diskCaching')]",
-                    "diskSizeGB": "[parameters('disksizes')[2]]"
+                    "diskSizeGB": "[parameters('disksizes')[3]]"
                 }
             ],
             "5": [
@@ -208,7 +208,7 @@
         "outputs": {
             "dataDiskArray": {
                 "type": "string",
-                "value": "[variables('disksArray')[parameters('numDataDisks')]]"
+                "value": "[variables('disksArray')['3'][0]"
             }
         }
     }
