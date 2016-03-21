@@ -943,7 +943,7 @@
     "dataDiskArray": {
       "type": "string",
       "value": "[variables('disksArray')[parameters('numDataDisks')]]"
-    }.
+    },
     "dataDiskArray1": {
       "type": "string",
       "value": "helloworld"
