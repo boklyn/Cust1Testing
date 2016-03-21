@@ -106,7 +106,7 @@
                     },
                     "createOption": "Empty",
                     "caching": "[parameters('diskCaching')]",
-                    "diskSizeGB": "[parameters('disksizes')[3]]"
+                    "diskSizeGB": "[parameters('disksizes')[2]]"
                 }
             ],
             "5": [
@@ -163,7 +163,8 @@
             "4delta": [
                 "[variables('dataDisks')['1'][0]]",
                 "[variables('dataDisks')['2'][0]]",
-                "[variables('dataDisks')['3'][0]]"
+                "[variables('dataDisks')['3'][0]]",
+                "[variables('dataDisks')['4'][0]]"
             ],
             "8delta": [
                 "[variables('dataDisks')['5'][0]]",
