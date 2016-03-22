@@ -2,9 +2,6 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "webvmstaticips": {
-            "value": [ "172.24.2.6", "172.24.2.7" ]
-        },
         "VHDStorageAccountName": {
             "value": "evhe2dmstor01"
         },
@@ -15,10 +12,13 @@
             "value": "EVHE1-RGP-001"
         },
         "existingSubnetName": {
-            "value": "EVHE2DM-SUB-001_172.24.2.0_24"
+            "value": "EVHE2DM-SUB-002_172.24.8.0_24"
+        },
+        "webAvailabilitySetName": {
+            "value": "evhe1dm-avset-004"
         },
         "webvmSize": {
-            "value": "Standard_D3"
+            "value": "Standard_D4"
         },
         "domainToJoin": {
             "value": "azureqa.corp.evolenthealth.com"
@@ -40,6 +40,24 @@
         },
         "vmAdminPassword": {
             "value": "P@ssword!"
+        },
+        "webvmstaticips": {
+            "value": [ "172.24.8.8", "172.24.8.9" ]
+        },
+        "websiteoffset": {
+            "value": 1
+        },
+        "nicoffset": {
+            "value": 7
+        },
+        "sitecount": {
+            "value": 2
+        },
+        "nicnameformat": {
+            "value": "evhe1dm-nic-0"
+        },
+        "vmnameformat": {
+            "value": "evhe1dm-rueg-0"
         }
     }
 }

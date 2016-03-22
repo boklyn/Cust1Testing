@@ -35,7 +35,6 @@
         },
         "webvmSize": {
             "type": "string",
-            "defaultValue": "Standard_D2_v2",
             "metadata": {
                 "description": "The size of the virtual machines"
             }
