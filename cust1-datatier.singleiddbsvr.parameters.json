@@ -63,7 +63,7 @@
             "value": "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/"
         },
         "disksizes": {
-            "value": [ 550, 250, 251, 252, 551]
+            "value": [ 550, 250, 251, 252, 551, 0, 0, 0, 0, 0, 0, 0 ]
         },
         "numdatadisks": {
             "value": 5
