@@ -189,7 +189,7 @@
                         "value": "[variables('diskCaching')]"
                     },
                     "folderpath": {
-                        "value": "[concat(toLower(parameters('vmnameformat')),'1/')]"
+                        "value": "[concat(toLower(parameters('vmnameformat')),parameters('websiteoffset'),'/')]"
                     },
                     "disksizes": {
                         "value": "[parameters('disksizes')]"
