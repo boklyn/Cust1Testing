@@ -15,10 +15,10 @@
             "value": "EVHE2DM-SUB-002_172.24.8.0_24"
         },
         "webAvailabilitySetName": {
-            "value": "evhe1dm-avset-004"
+            "value": "evhe1dm-avset-005"
         },
         "webvmSize": {
-            "value": "Standard_D4"
+            "value": "Standard_D3"
         },
         "domainToJoin": {
             "value": "azureqa.corp.evolenthealth.com"
@@ -42,13 +42,13 @@
             "value": "P@ssword!"
         },
         "webvmstaticips": {
-            "value": [ "172.24.8.8", "172.24.8.9" ]
+            "value": [ "172.24.8.15", "172.24.8.16" ]
         },
         "websiteoffset": {
             "value": 1
         },
         "nicoffset": {
-            "value": 7
+            "value": 17
         },
         "sitecount": {
             "value": 2
@@ -57,7 +57,7 @@
             "value": "evhe1dm-nic-0"
         },
         "vmnameformat": {
-            "value": "evhe1dm-rueg-0"
+            "value": "evhe1dm-idap-0"
         }
     }
 }

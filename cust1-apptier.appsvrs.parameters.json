@@ -42,13 +42,13 @@
             "value": "P@ssword!"
         },
         "webvmstaticips": {
-            "value": [ "172.24.8.4", "172.24.8.5" ]
+            "value": [ "172.24.8.15", "172.24.8.16" ]
         },
         "websiteoffset": {
             "value": 1
         },
         "nicoffset": {
-            "value": 3
+            "value": 17
         },
         "sitecount": {
             "value": 2
