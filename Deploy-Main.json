@@ -1,52 +1,52 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "deploychoice": {
-            "type": "string",
-            "metadata": {
-                "description": "Environment to Deploy"
-            },
-            "allowedValues": [
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-network.json",
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-DomainControllers.json",
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-s2s.json",
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-apptier.twosvrdeploy.json"
-            ]
-        },
-        "paramchoice": {
-            "type": "string",
-            "metadata": {
-                "description": "Different Parameters files choice"
-            },
-            "allowedValues": [
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-network.parameters.json",
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-DomainControllers.parameters.json",
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-s2s.parameters.json",
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-webtier.parameters.json",
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-apptier.appsvrs.parameters.json",
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-apptier.edwvrs.parameters.json",
-                "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-apptier.rulessvrs.parameters.json"
-            ]
-        }
-
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "deploychoice": {
+      "type": "string",
+      "metadata": {
+        "description": "Environment to Deploy"
+      },
+      "allowedValues": [
+        "https://multideploydemo.blob.core.windows.net/pubtest/cust1-template-network.json",
+        "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-DomainControllers.json",
+        "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-s2s.json",
+        "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-apptier.twosvrdeploy.json"
+      ]
     },
-    "resources": [
-        {
-            "apiVersion": "2015-01-01",
-            "name": "ProductionDeployment",
-            "type": "Microsoft.Resources/deployments",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[parameters('deploychoice')]",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parametersLink": {
-                    "uri": "[parameters('paramchoice')]",
-                    "contentVersion": "1.0.0.0"
-                }
-            }
+    "paramchoice": {
+      "type": "string",
+      "metadata": {
+        "description": "Different Parameters files choice"
+      },
+      "allowedValues": [
+        "https://multideploydemo.blob.core.windows.net/pubtest/cust1-parameters-network.json",
+        "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-DomainControllers.parameters.json",
+        "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-s2s.parameters.json",
+        "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-webtier.parameters.json",
+        "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-apptier.appsvrs.parameters.json",
+        "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-apptier.edwvrs.parameters.json",
+        "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-apptier.rulessvrs.parameters.json"
+      ]
+    }
+
+  },
+  "resources": [
+    {
+      "apiVersion": "2015-01-01",
+      "name": "ProductionDeployment",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[parameters('deploychoice')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parametersLink": {
+          "uri": "[parameters('paramchoice')]",
+          "contentVersion": "1.0.0.0"
         }
-    ]
+      }
+    }
+  ]
 }
