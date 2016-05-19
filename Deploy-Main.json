@@ -10,7 +10,7 @@
       "allowedValues": [
         "https://multideploydemo.blob.core.windows.net/pubtest/cust1-template-network.json",
         "https://multideploydemo.blob.core.windows.net/pubtest/cust1-template-domaincontrollers_withkey.json",
-        "https://multideploydemo.blob.core.windows.net/pubtest/master/cust1-s2s.json",
+        "https://multideploydemo.blob.core.windows.net/pubtest/cust1-template-multisvrdeploy_withkey.cse.json",
         "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-apptier.twosvrdeploy.json"
       ]
     },
@@ -22,7 +22,7 @@
       "allowedValues": [
         "https://multideploydemo.blob.core.windows.net/pubtest/cust1-parameters-network.json",
         "https://multideploydemo.blob.core.windows.net/pubtest/cust1-parameters-key.domaincontrollers.json",
-        "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-s2s.parameters.json",
+        "https://multideploydemo.blob.core.windows.net/pubtest/cust1-parameters-key.admintier.svrs.json",
         "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-webtier.parameters.json",
         "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-apptier.appsvrs.parameters.json",
         "https://raw.githubusercontent.com/boklyn/Cust1Testing/master/cust1-apptier.edwvrs.parameters.json",
