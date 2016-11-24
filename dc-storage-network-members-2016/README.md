@@ -1,6 +1,6 @@
 # [Solution name]
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmarcvaneijk%2Farm%2Fmaster%2Fdc-storage-network-members-2016%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fboklyn%2FCust1Testing%2Fmaster%2Fdc-storage-network-members-2016%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/></a>
 
 This template deploys a [solution name]. The [solution name] is a [description]
