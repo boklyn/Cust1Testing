@@ -19,7 +19,7 @@
     },
     "baseTemplate": {
       "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/marcvaneijk/arm/master/dc-storage-network-members-2016/"
+      "defaultValue": "https://github.com/boklyn/Cust1Testing/tree/master/dc-storage-network-members-2016/"
     }
   },
   "variables": {
