@@ -10,7 +10,7 @@
         "allowedValues": [
           "https://bokstor1.blob.core.windows.net/datafiles/template-network.json"
         ],
-        "defaultValue": "https://raw.githubusercontent.com/Mincom/epm-devops/master/Deployment/Velocity/vso-template-multisvrdeploy_withkey.cse.domain.json?token=AMNanMUiHu4Rr2Ro51dBgsiFBFDVrXMMks5X0xp4wA%3D%3D"
+        "defaultValue": "https://bokstor1.blob.core.windows.net/datafiles/template-multisvrdeploy_withkey.cse.domain.json"
       },
         "paramchoice": {
             "type": "string",
@@ -19,7 +19,7 @@
           },
           "allowedValues": [
             "https://bokstor1.blob.core.windows.net/datafiles/parameters-bokdemonetwork.json",
-            "https://raw.githubusercontent.com/Mincom/epm-devops/master/Velocity/vso-parameters-key.dataservices.svrs.json?token=AVJveLyx6dTEyPm4CvtrTS3a5zgV1VBrks5YIkOIwA%3D%3D"
+            "https://bokstor1.blob.core.windows.net/datafiles/parameters-key.role1.svrs.json"
           ]
         }
     },

@@ -8,12 +8,6 @@
     "diagStorageAccountName": {
       "value": "bokstor2"
     },
-    "domainToJoin": {
-      "value": "velocity.com"
-    },
-    "domainUsername": {
-      "value": "Admin"
-    },
     "vmAdminUsername": {
       "value": "abblocadm"
     },
@@ -71,13 +65,13 @@
       ]
     },
     "existingVNETName": {
-      "value": "usw-backend-vnet"
+      "value": "bok-vnet-01"
     },
     "vnetrgpname": {
-      "value": "USW-DSProd"
+      "value": "boklyndemo"
     },
     "existingSubnetName": {
-      "value": "analyst"
+      "value": "bok-sub-01"
     }
   }
 }

@@ -4,7 +4,7 @@
   "parameters": {
     "apptiersubnetname": { "value": "bok-sub-01" },
     "apptiersubnetrange": { "value": "172.26.8.0/24" },
-    "location": { "value": "eastus" },
+    "location": { "value": "East US" },
     "vnetaddressprefix": { "value": "172.26.0.0/20" },
     "vnetname": { "value": "bok-vnet-01" }
   }
