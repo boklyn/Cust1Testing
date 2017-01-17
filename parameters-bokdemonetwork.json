@@ -1,0 +1,11 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apptiersubnetname": { "value": "bok-sub-01" },
+    "apptiersubnetrange": { "value": "172.26.8.0/24" },
+    "location": { "value": "eastus" },
+    "vnetaddressprefix": { "value": "172.26.0.0/20" },
+    "vnetname": { "value": "bok-vnet-01" }
+  }
+}

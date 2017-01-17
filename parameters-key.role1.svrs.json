@@ -1,0 +1,83 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "VHDStorageAccountNames": {
+      "value": "bokstor1"
+    },
+    "diagStorageAccountName": {
+      "value": "bokstor2"
+    },
+    "domainToJoin": {
+      "value": "velocity.com"
+    },
+    "domainUsername": {
+      "value": "Admin"
+    },
+    "vmAdminUsername": {
+      "value": "abblocadm"
+    },
+    "vmAdminPassword": {
+      "value": "p@ssw0rd!"
+    },
+    "optionsselectpath": {
+      "value": "https://bokstor1.blob.core.windows.net/datafiles/template-optionsselec.json"
+    },
+    "initidiskpath": {
+      "value": "https://bokstor1.blob.core.windows.net/datafiles/"
+    },
+    "nicoffset": {
+      "value": 1
+    },
+    "sitecount": {
+      "value": 1
+    },
+    "nicnameformat": {
+      "value": "bokdemo-nic-"
+    },
+    "vmnames": {
+      "value": [
+        "bok-demo01"
+      ]
+    },
+    "vmSizes": {
+      "value": [
+        "Standard_DS2"
+      ]
+    },
+    "diskcount": {
+      "value": [
+        1
+      ]
+    },
+    "disksizes": {
+      "value": [
+        [ 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+      ]
+    },
+    "initdisksizes": {
+      "value": [
+        "95"
+      ]
+    },
+    "vmtype": {
+      "value": [
+        "role1"
+      ]
+    },
+    "windowsOSversion": {
+      "value": [
+        "2012-R2-Datacenter"
+      ]
+    },
+    "existingVNETName": {
+      "value": "usw-backend-vnet"
+    },
+    "vnetrgpname": {
+      "value": "USW-DSProd"
+    },
+    "existingSubnetName": {
+      "value": "analyst"
+    }
+  }
+}

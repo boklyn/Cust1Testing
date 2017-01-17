@@ -1,0 +1,85 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apptiersubnetname": {
+      "type": "string",
+      "metadata": {
+        "description": "app tier Subnet Name"
+      }
+    },
+    "apptiersubnetrange": {
+      "type": "string",
+      "metadata": {
+        "description": "app tier Subnet Range"
+      }
+    },
+    "location": {
+      "type": "String",
+      "allowedValues": [
+        "East US",
+        "West US",
+        "West Europe",
+        "North Europe",
+        "East US 2",
+        "southcentralus"
+      ],
+      "metadata": {
+        "description": "Deployment location"
+      }
+    },
+    "vNETAddressPrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "VNET address prefix"
+      }
+    },
+    "vNETName": {
+      "type": "string",
+      "metadata": {
+        "description": "VNET IP range"
+      }
+    },
+    "vnetrgpname": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource group where the vnet is located. "
+      },
+      "defaultValue": "[resourceGroup().name]"
+    }
+  },
+  "variables": {
+    "frontEndRef": "[concat(variables('vnetID'),'/subnets/',parameters('apptiersubnetname'))]",
+    "vnetID": "[resourceId(parameters('vnetrgpname'), 'Microsoft.Network/virtualNetworks', parameters('vNETName'))]",
+    "apptiersubname": "[concat(parameters('apptiersubnetname'),'_',replace(parameters('apptiersubnetrange'),'/','_'))]"
+  },
+  "resources": [
+    {
+      "name": "[parameters('vNETName')]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "[parameters('location')]",
+      "apiVersion": "2015-06-15",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('vNETAddressPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('apptiersubname')]",
+            "properties": {
+              "addressPrefix": "[parameters('apptiersubnetrange')]"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "outputs": {
+    "appsubnet": {
+      "value": "[variables('apptiersubname')]",
+      "type": "string"
+    }
+  }
+}
