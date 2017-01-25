@@ -9,10 +9,10 @@
       "value": "bokstor2"
     },
     "vmAdminUsername": {
-      "value": "abblocadm"
+      "value": "locadm"
     },
     "vmAdminPassword": {
-      "value": "p@ssw0rd!"
+      "value": "P@ssw0rd!time4tea"
     },
     "optionsselectpath": {
       "value": "https://bokstor1.blob.core.windows.net/datafiles/template-optionsselec.json"
@@ -71,7 +71,7 @@
       "value": "boklyndemo"
     },
     "existingSubnetName": {
-      "value": "bok-sub-01"
+      "value": "bok-sub-01_172.26.8.0_24"
     }
   }
 }

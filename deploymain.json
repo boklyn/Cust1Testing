@@ -8,7 +8,8 @@
           "description": "Base template config"
         },
         "allowedValues": [
-          "https://bokstor1.blob.core.windows.net/datafiles/template-network.json"
+          "https://bokstor1.blob.core.windows.net/datafiles/template-network.json",
+		  "https://bokstor1.blob.core.windows.net/datafiles/template-multisvrdeploy_withkey.cse.domain.json"
         ],
         "defaultValue": "https://bokstor1.blob.core.windows.net/datafiles/template-multisvrdeploy_withkey.cse.domain.json"
       },

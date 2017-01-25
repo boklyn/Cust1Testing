@@ -339,32 +339,6 @@
               "commandToExecute": "[concat('powershell.exe -Executionpolicy Unrestricted  -File ','initdisk_cse.ps1 -disks ', parameters('initdisksizes')[copyIndex()])]"
             }
           }
-        },
-        {
-          "apiVersion": "[variables('apiVersion')]",
-          "type": "Microsoft.Compute/virtualMachines/extensions",
-          "name": "[concat(parameters('vmnames')[copyIndex()],'/joindomain')]",
-          "location": "[resourceGroup().location]",
-          "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', parameters('vmnames')[copyIndex()])]",
-            "[resourceId('Microsoft.Resources/deployments', concat(toLower(parameters('vmnames')[copyIndex()]),'-disksel'))]",
-            "[resourceId('Microsoft.Compute/virtualMachines/extensions', parameters('vmnames')[copyIndex()],'cseexec')]"
-          ],
-          "properties": {
-            "publisher": "Microsoft.Compute",
-            "type": "JsonADDomainExtension",
-            "typeHandlerVersion": "1.0",
-            "settings": {
-              "Name": "[parameters('domainToJoin')]",
-              "OUPath": "[parameters('ouPath')]",
-              "User": "[concat(parameters('domainToJoin'), '\\', parameters('domainUsername'))]",
-              "Restart": "true",
-              "Options": "[parameters('domainJoinOptions')]"
-            },
-            "protectedsettings": {
-              "Password": "[parameters('domainPassword')]"
-            }
-          }
         }
       ]
     }
