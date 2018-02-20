@@ -177,8 +177,8 @@ install_mongodb()
 	log "Downloading MongoDB package $PACKAGE_NAME from $PACKAGE_URL"
 
 	# Configure mongodb.list file with the correct location
-	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-	echo "deb ${PACKAGE_URL} "$(lsb_release -sc)"/mongodb-enterprise/3.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-enterprise.list
+	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+	echo "deb ${PACKAGE_URL} "$(lsb_release -sc)"/mongodb-enterprise/3.6 multiverse" | tee /etc/apt/sources.list.d/mongodb-enterprise.list
 
 	# Install updates
 	apt-get -y update
